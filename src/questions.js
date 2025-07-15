@@ -1,0 +1,32 @@
+export const discQuestions = [
+    { id: 1, adjectives: ['enthusiastic', 'daring', 'diplomatic', 'satisfied'] },
+    { id: 2, adjectives: ['cautious', 'determined', 'convincing', 'good-natured'] },
+    { id: 3, adjectives: ['friendly', 'accurate', 'outspoken', 'calm'] },
+    { id: 4, adjectives: ['talkative', 'controlled', 'conventional', 'decisive'] },
+    { id: 5, adjectives: ['adventurous', 'insightful', 'outgoing', 'moderate'] },
+    { id: 6, adjectives: ['gentle', 'persuasive', 'humble', 'original'] },
+    { id: 7, adjectives: ['expressive', 'conscientious', 'dominant', 'responsive'] },
+    { id: 8, adjectives: ['poised', 'observant', 'modest', 'impatient'] },
+    { id: 9, adjectives: ['tactful', 'agreeable', 'magnetic', 'insistent'] },
+    { id: 10, adjectives: ['brave', 'inspiring', 'submissive', 'timid'] },
+    { id: 11, adjectives: ['reserved', 'obliging', 'strong-willed', 'cheerful'] },
+    { id: 12, adjectives: ['stimulating', 'kind', 'perceptive', 'independent'] },
+    { id: 13, adjectives: ['competitive', 'considerate', 'joyful', 'private'] },
+    { id: 14, adjectives: ['fussy', 'obedient', 'firm', 'playful'] },
+    { id: 15, adjectives: ['attractive', 'introspective', 'stubborn', 'predictable'] },
+    { id: 16, adjectives: ['logical', 'bold', 'loyal', 'charming'] },
+    { id: 17, adjectives: ['sociable', 'patient', 'self-reliant', 'self-spoken'] },
+    { id: 18, adjectives: ['willing', 'eager', 'thorough', 'high-spirited'] },
+    { id: 19, adjectives: ['aggressive', 'extroverted', 'amiable', 'fearful'] },
+    { id: 20, adjectives: ['confident', 'sympathetic', 'impartial', 'assertive'] },
+    { id: 21, adjectives: ['well-disciplined', 'generous', 'animated', 'persistent'] },
+    { id: 22, adjectives: ['impulsive', 'introverted', 'forceful', 'easygoing'] },
+    { id: 23, adjectives: ['good mixer', 'refined', 'vigorous', 'lenient'] },
+    { id: 24, adjectives: ['captivating', 'contented', 'demanding', 'compliant'] },
+    { id: 25, adjectives: ['argumentative', 'systematic', 'cooperative', 'light-hearted'] },
+    { id: 26, adjectives: ['jovial', 'precise', 'direct', 'even-tempered'] },
+    { id: 27, adjectives: ['restless', 'neighborly', 'appealing', 'careful'] },
+    { id: 28, adjectives: ['respectful', 'pioneering', 'optimistic', 'helpful'] }
+    ];
+    
+    
