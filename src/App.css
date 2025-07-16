@@ -39,17 +39,26 @@
 .question-group {
   background: #f7f8fa;
   box-shadow: 0 4px 24px 0 rgba(80, 112, 255, 0.10), 0 1.5px 4px 0 rgba(80, 112, 255, 0.08);
-  border-radius: 18px;
-  transition: box-shadow 0.3s, transform 0.3s;
-  margin: 24px auto;
-  padding: 10px 18px;
+  border-radius: 22px;
+  transition: box-shadow 0.3s, transform 0.3s, border 0.2s;
+  margin: 32px auto;
+  padding: 18px 28px;
   width: 80%;
   position: relative;
 }
 
 question-group:hover {
   box-shadow: 0 8px 32px 0 rgba(80, 112, 255, 0.18), 0 3px 8px 0 rgba(80, 112, 255, 0.12);
-  transform: translateY(-2px) scale(1.01);
+  transform: translateY(-3px) scale(1.015);
+  border: 1.5px solid #b4c6fc;
+}
+
+.question-group h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1e293b;
+  letter-spacing: 0.5px;
 }
 
 .adjective-list-container {
@@ -108,7 +117,9 @@ input[type="radio"] {
 }
 
 .odd-question {
-  background: #8cbee4 
+  background: linear-gradient(90deg, #cbeafe 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  box-shadow: 0 2px 8px rgba(80, 112, 255, 0.07);
 }
 
 form button[type="submit"] {
@@ -158,4 +169,159 @@ form button[type="submit"]:hover {
 .highlight-blue {
   color: #000000;
   font-weight: bold;
+}
+
+/* Survey Progress Bar Styles */
+.survey-progress-bar-container {
+  max-width: 600px;
+  margin: 0 auto 32px auto;
+  padding: 0 10px;
+}
+
+/* Background of the bar (outer shell) */
+.survey-progress-bar-bg {
+  height: 36px;
+  background-color: transparent;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #4ade80;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
+/* Fill of the progress bar */
+.survey-progress-bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.85) 0%,
+    rgba(34, 197, 94, 0.65) 100%
+  );
+  border-radius: 24px;
+  transition: width 0.5s ease-in-out, background 0.3s;
+  position: relative;
+  opacity: 0.95;
+  backdrop-filter: blur(1px);
+}
+
+/* When progress is 0%, hide fill */
+.survey-progress-bar-fill[style*="width: 0%"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0;
+}
+
+/* Light overlay shine on top half */
+.survey-progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; right: 0; height: 50%;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* Inner glow or highlight stripe (optional, can remove if too busy) */
+.survey-progress-bar-bg::before {
+  content: '';
+  position: absolute;
+  left: 10%; right: 10%; top: 6px; height: 8px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Progress label under bar */
+.survey-progress-bar-label {
+  text-align: right;
+  font-size: 15px;
+  color: #15803d;
+  margin-top: 6px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(224, 252, 230, 0.8);
+}
+
+
+/* Navigation Buttons */
+.survey-nav-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 32px 0 0 0;
+}
+.survey-nav-btn {
+  background: linear-gradient(90deg, #60a5fa 0%, #818cf8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 32px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.survey-nav-btn:disabled {
+  background: #e0e7ff;
+  color: #a5b4fc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.survey-nav-btn:not(:disabled):hover {
+  background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+}
+.survey-group-indicator {
+  font-size: 1.1rem;
+  color: #3730a3;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.survey-groups-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .survey-groups-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.clear-group-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #888;
+  z-index: 2;
+  padding: 2px 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.clear-group-btn:hover {
+  color: #e11d48;
+  background: #f3f4f6;
+  border-radius: 50%;
 }

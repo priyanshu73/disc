@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-function QuestionGroup({ question, answers, onAnswerChange }) {
+function QuestionGroup({ question, answers, onAnswerChange, onClear }) {
   const handleSelection = (type, value) => {
     onAnswerChange(question.id, type, value);
   };
@@ -7,10 +9,30 @@ function QuestionGroup({ question, answers, onAnswerChange }) {
   const groupClass =
     "question-group" + (question.id % 2 !== 0 ? " odd-question" : "");
 
-
   return (
-    <div className={groupClass}>
+    <div className={groupClass} style={{ position: "relative" }}>
+      {/* Clear icon */}
+      
       <h4>Question {question.id}</h4>
+      <button
+        type="button"
+        className="clear-group-btn"
+        title="Clear selection"
+        onClick={() => onClear(question.id)}
+        style={{
+          position: "absolute",
+          top: 10,
+          right: 10,
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "1.1rem",
+          color: "#888"
+        }}
+        aria-label="Clear selection"
+      >
+        <FontAwesomeIcon icon={faTrashCan} />
+      </button>
       <div className="adjective-list-container">
         {/* Header for the columns */}
         <div className="adjective-list-header">
