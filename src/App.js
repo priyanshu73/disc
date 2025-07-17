@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <SurveyForm />
       <footer>
-        <p>© 2023 DISC Assessment. All rights reserved.</p>
+        <p>© 2025 Gettysburg College Computer Science Department. All rights reserved.</p>
       </footer>
     </div>
   );

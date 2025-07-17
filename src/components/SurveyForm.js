@@ -1,14 +1,35 @@
 
 import React, { useState, useEffect } from 'react';
-import { discQuestions } from '../questions'; 
 import QuestionGroup from './QuestionGroup';   
-import { submitAnswers } from '../config/api';
+import { submitAnswers, fetchDiscQuestions } from '../config/api';
+import LoadingSpinner from './LoadingSpinner';
 
 const GROUPS_PER_PAGE = 2;
 
 function SurveyForm() {
   const [answers, setAnswers] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [discQuestions, setDiscQuestions] = useState([]);
+
+  // Load questions from server
+  useEffect(() => {
+    const loadQuestions = async () => {
+      try {
+        setLoading(true);
+        const questions = await fetchDiscQuestions();
+        console.log(questions);
+        setDiscQuestions(questions);
+      } catch (error) {
+        console.error('Failed to load questions:', error);
+        // You might want to show an error message to the user here
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadQuestions();
+  }, []);
 
   useEffect(() => {
     console.log(answers);
@@ -40,6 +61,17 @@ function SurveyForm() {
       console.error('Failed to submit answers:', error);
     }
   };
+
+  // Show loading spinner while fetching questions
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '50px' }}>
+        <LoadingSpinner size="large" color="#4ade80" />
+        <p style={{ marginTop: '20px', color: '#666' }}>Loading survey questions...</p>
+      </div>
+    );
+  }
+
   // Progress bar logic
   const totalQuestions = discQuestions.length;
   const totalPages = Math.ceil(totalQuestions / GROUPS_PER_PAGE);

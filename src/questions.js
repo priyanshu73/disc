@@ -22,7 +22,7 @@ export const discQuestions = [
     { id: 21, adjectives: ['Well-disciplined', 'Generous', 'Animated', 'Persistent'] },
     { id: 22, adjectives: ['Impulsive', 'Introverted', 'Forceful', 'Easygoing'] },
     { id: 23, adjectives: ['Good mixer', 'Refined', 'Vigorous', 'Lenient'] },
-    { id: 24, adjectives: ['Captivating', 'Contented', 'Demanding', 'Compliant'] },
+    { id: 24, adjectives: ['Captivating', 'Contended', 'Demanding', 'Compliant'] },
     { id: 25, adjectives: ['Argumentative', 'Systematic', 'Cooperative', 'Light-hearted'] },
     { id: 26, adjectives: ['Jovial', 'Precise', 'Direct', 'Even-tempered'] },
     { id: 27, adjectives: ['Restless', 'Neighborly', 'Appealing', 'Careful'] },

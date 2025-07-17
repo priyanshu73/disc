@@ -26,6 +26,12 @@ export const apiCall = async (endpoint, options = {}) => {
   }
 };
 
+// Fetch DiSC questions from server
+export const fetchDiscQuestions = async () => {
+  const response = await apiCall('/disc-questions');
+  return response.data; // Extract the data array from the response
+};
+
 // Submit survey answers
 export const submitAnswers = async (answers) => {
   return await apiCall('/submit-answers', {
