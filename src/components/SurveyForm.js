@@ -12,7 +12,7 @@ function SurveyForm() {
   const [loading, setLoading] = useState(true);
   const [discQuestions, setDiscQuestions] = useState([]);
 
-  // Load questions from server
+  
   useEffect(() => {
     const loadQuestions = async () => {
       try {
