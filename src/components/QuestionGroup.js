@@ -51,7 +51,7 @@ function QuestionGroup({ question, answers, onAnswerChange, onClear }) {
                   name={`most-${question.id}`}
                   value={adjective}
                   checked={answers.most === adjective}
-                  disabled={answers.least === adjective}
+                  // disabled={answers.least === adjective}
                   onChange={() => handleSelection('most', adjective)}
                 />
               </span>
@@ -62,7 +62,7 @@ function QuestionGroup({ question, answers, onAnswerChange, onClear }) {
                   name={`least-${question.id}`}
                   value={adjective}
                   checked={answers.least === adjective}
-                  disabled={answers.most === adjective}
+                  // disabled={answers.most === adjective}
                   onChange={() => handleSelection('least', adjective)}
                 />
               </span>

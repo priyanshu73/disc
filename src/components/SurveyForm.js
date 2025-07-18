@@ -24,7 +24,7 @@ function SurveyForm() {
         console.error('Failed to load questions:', error);
         // You might want to show an error message to the user here
       } finally {
-        setLoading(false);
+        setTimeout(() => setLoading(false), 750);
       }
     };
 

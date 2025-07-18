@@ -9,11 +9,19 @@ export const apiCall = async (endpoint, options = {}) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     ...options,
   };
 
+  console.log('API Call:', url, defaultOptions);
+  console.log('Cookies:', document.cookie);
+
   try {
     const response = await fetch(url, defaultOptions);
+    
+    console.log('Response status:', response.status);
+    console.log('Response headers:', response.headers);
+    console.log('Response body:', await response.message);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -43,4 +51,29 @@ export const submitAnswers = async (answers) => {
 // Specific API functions
 export const fetchAdjectives = async () => {
   return await apiCall('/adjectives');
+}; 
+
+// Auth API functions
+export const login = async (username, password) => {
+  // Ensure the body uses the correct keys: username and password
+  return await apiCall('/login', {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify({ username, password })
+  });
+};
+
+export const getMe = async () => {
+  return await apiCall('/me', {
+    method: 'GET',
+    credentials: 'include',
+  });
+}; 
+
+// Logout API function
+export const logout = async () => {
+  return await apiCall('/logout', {
+    method: 'POST',
+    credentials: 'include',
+  });
 }; 
