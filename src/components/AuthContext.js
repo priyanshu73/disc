@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       try {
         const res = await getMe();
+        console.log("user = ", res.user);
         setUser(res.user);
       } catch (err) {
         setUser(null);
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await apiLogin(username, password);
       const res = await getMe();
+      console.log("user = ", res.user);
       setUser(res.user);
       setLoading(false);
       return true;
@@ -65,7 +67,15 @@ export const AuthProvider = ({ children }) => {
 // ProtectedRoute component
 export const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  if (loading ) return <div style={{ textAlign: 'center', marginTop: 80 }}>Loading...</div>;
-  if (!user) return <Navigate to="/login" replace />;
+  console.log('ProtectedRoute check:', { user, loading });
+  if (loading) {
+    console.log('ProtectedRoute: still loading, not redirecting');
+    return <div style={{ textAlign: 'center', marginTop: 80 }}></div>;
+  }
+  if (!user) {
+    console.log('ProtectedRoute: user is null, redirecting to /login');
+    return <Navigate to="/login" replace />;
+  }
+  console.log('ProtectedRoute: user authenticated, rendering children');
   return children;
 }; 

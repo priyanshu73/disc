@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const LoginPage = () => {
   const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
   const { login, loading } = useAuth();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowForm(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,6 +28,34 @@ const LoginPage = () => {
       setError('Invalid username or password');
     }
   };
+
+  if (!showForm) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: '#f7f9fc',
+      }}>
+        <span style={{
+          width: 48,
+          height: 48,
+          border: '4px solid #e5e7eb',
+          borderTop: '4px solid #4a90e2',
+          borderRadius: '50%',
+          display: 'inline-block',
+          animation: 'spin 1s linear infinite',
+        }} />
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <div className="auth-container">

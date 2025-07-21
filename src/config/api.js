@@ -13,7 +13,7 @@ export const apiCall = async (endpoint, options = {}) => {
     ...options,
   };
 
-  console.log('API Call:', url, defaultOptions);
+  //console.log('API Call:', url, defaultOptions);
   console.log('Cookies:', document.cookie);
 
   try {
@@ -75,5 +75,14 @@ export const logout = async () => {
   return await apiCall('/logout', {
     method: 'POST',
     credentials: 'include',
+  });
+}; 
+
+// Change password API function
+export const changePassword = async (oldPassword, newPassword) => {
+  return await apiCall('/change-password', {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify({ oldPassword, newPassword })
   });
 }; 

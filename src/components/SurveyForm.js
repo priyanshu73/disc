@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import QuestionGroup from './QuestionGroup';   
 import { submitAnswers, fetchDiscQuestions } from '../config/api';
 import LoadingSpinner from './LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 
 const GROUPS_PER_PAGE = 2;
 
@@ -10,9 +11,12 @@ function SurveyForm() {
   const [answers, setAnswers] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [discQuestions, setDiscQuestions] = useState([]);
+  const [lastResultId, setLastResultId] = useState(null);
+  const navigate = useNavigate();
 
-  
   useEffect(() => {
     const loadQuestions = async () => {
       try {
@@ -52,12 +56,19 @@ function SurveyForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    setSubmitting(true);
     try {
       console.log('Submitting answers:', answers);
       const response = await submitAnswers(answers);
       console.log('Server response:', response);
+      // If response contains a result id, store it for view results
+      setLastResultId(response?.resultId || null);
+      setTimeout(() => {
+        setSubmitting(false);
+        setSubmitted(true);
+      }, 1000);
     } catch (error) {
+      setSubmitting(false);
       console.error('Failed to submit answers:', error);
     }
   };
@@ -93,7 +104,71 @@ function SurveyForm() {
   const currentQuestions = discQuestions.slice(startIdx, endIdx);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ position: 'relative' }}>
+      {/* Overlay after submit */}
+      {submitted && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.45)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 2000,
+        }}>
+          <div style={{
+            background: '#fff',
+            borderRadius: 16,
+            padding: '2.5rem 2.5rem 2rem 2.5rem',
+            boxShadow: '0 4px 32px rgba(0,0,0,0.13)',
+            maxWidth: 400,
+            width: '100%',
+            textAlign: 'center',
+          }}>
+            <h2 style={{ color: '#38bdf8', fontWeight: 700, marginBottom: 16 }}>Assessment Submitted!</h2>
+            <p style={{ color: '#4a5568', marginBottom: 28 }}>
+              Thank you for taking the assessment.<br />Your answers have been submitted successfully.
+            </p>
+            <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+              <button
+                style={{
+                  background: '#4a90e2',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 8,
+                  padding: '12px 24px',
+                  fontWeight: 600,
+                  fontSize: '1.08rem',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s',
+                }}
+                onClick={() => navigate('/dashboard')}
+              >
+                Back to Dashboard
+              </button>
+              <button
+                style={{
+                  background: '#22c55e',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 8,
+                  padding: '12px 24px',
+                  fontWeight: 600,
+                  fontSize: '1.08rem',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s',
+                }}
+                onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : '/results/1')}
+              >
+                View Results
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Progress Bar */}
       <div className="survey-header">
         <h1>GBURG DiSC<sup className="reg-mark">®</sup></h1>
@@ -127,7 +202,32 @@ function SurveyForm() {
         </div>
       </div>
       {currentPage === totalPages - 1 && (
-        <button type="submit" style={{ marginTop: 24 }}>Submit</button>
+        <button type="submit" style={{ marginTop: 24, minWidth: 120, background: submitting ? '#cbd5e1' : '#4a90e2', color: submitting ? '#a0aec0' : '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontWeight: 600, fontSize: '1.08rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} disabled={submitting}>
+          {submitting && (
+            <span style={{
+              display: 'inline-block',
+              verticalAlign: 'middle',
+              marginRight: 10,
+            }}>
+              <span style={{
+                width: 18,
+                height: 18,
+                border: '2.5px solid #e5e7eb',
+                borderTop: '2.5px solid #38bdf8',
+                borderRadius: '50%',
+                display: 'inline-block',
+                animation: 'spin 1s linear infinite',
+              }} />
+              <style>{`
+                @keyframes spin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+              `}</style>
+            </span>
+          )}
+          {submitting ? 'Submitting...' : 'Submit'}
+        </button>
       )}
     </form>
   );
