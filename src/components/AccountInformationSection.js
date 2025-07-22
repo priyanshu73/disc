@@ -28,8 +28,10 @@ const AccountInformationSection = ({ user }) => {
           <InfoItem label="First Name" value={user.firstname} />
           <InfoItem label="Last Name" value={user.lastname} />
           <InfoItem label="Email Addres" value={user.username + "@gettysburg.edu"} />
+          <InfoItem label="Instructor" value={user.instructor} />
           <InfoItem label="Class Year" value={user.class_year} />
-          <InfoItem label="Graduating Semester" value={user.semester} />
+          <InfoItem label="Graduating Semester" value={user.semester === 'S' ? "Spring" : "Fall"} />
+          
         </div>
       </div>
     </div>
