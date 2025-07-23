@@ -18,20 +18,25 @@ const AccountInformationSection = ({ user }) => {
               {user.firstname} {user.lastname}
             </p>
             <p style={{ color: '#718096' }}>@{user.username}</p>
+            <p style={{ color: '#4a90e2', fontWeight: 500, marginTop: 2 }}>
+              {user.is_instructor ? 'Instructor' : 'Student'}
+            </p>
           </div>
         </div>
 
         <hr className="separator" />
 
-        {/* Static Info Grid */}
+        {/* Info Grid */}
         <div className="infoGrid">
           <InfoItem label="First Name" value={user.firstname} />
           <InfoItem label="Last Name" value={user.lastname} />
-          <InfoItem label="Email Addres" value={user.username + "@gettysburg.edu"} />
-          <InfoItem label="Instructor" value={user.instructor} />
-          <InfoItem label="Class Year" value={user.class_year} />
-          <InfoItem label="Graduating Semester" value={user.semester === 'S' ? "Spring" : "Fall"} />
-          
+          <InfoItem label="Email Address" value={user.username + "@gettysburg.edu"} />
+          {!user.is_instructor && (
+            <>
+              <InfoItem label="Class Year" value={user.class_year} />
+              <InfoItem label="Graduating Semester" value={user.semester === 'S' ? "Spring" : user.semester === 'F' ? "Fall" : ""} />
+            </>
+          )}
         </div>
       </div>
     </div>

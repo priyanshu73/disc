@@ -7,7 +7,7 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
-  const { login, loading } = useAuth();
+  const { login, loading, user } = useAuth();
 
   useEffect(() => {
     const timer = setTimeout(() => setShowForm(true), 1000);
@@ -23,7 +23,11 @@ const LoginPage = () => {
     setError(null);
     const success = await login(form.username, form.password);
     if (success) {
-      navigate('/dashboard');
+      if (user && user.is_instructor) {
+        navigate('/instructor');
+      } else {
+        navigate('/dashboard');
+      }
     } else {
       setError('Invalid username or password');
     }

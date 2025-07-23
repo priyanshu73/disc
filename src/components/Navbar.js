@@ -23,8 +23,17 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-cool">
       <div className="navbar-left">
-        <Link to="/dashboard" className={`navbar-link${isActive('/dashboard') ? ' active' : ''}`}>Dashboard</Link>
-        <Link to="/assessment" className={`navbar-link${isActive('/assessment') ? ' active' : ''}`}>Assessment</Link>
+        {user?.is_instructor ? (
+          <>
+            <Link to="/" className={`navbar-link${isActive('/instructor') ? ' active' : ''}`}>Dashboard</Link>
+            {/* Add more instructor-specific links here if needed */}
+          </>
+        ) : (
+          <>
+            <Link to="/dashboard" className={`navbar-link${isActive('/dashboard') ? ' active' : ''}`}>Dashboard</Link>
+            <Link to="/assessment" className={`navbar-link${isActive('/assessment') ? ' active' : ''}`}>Assessment</Link>
+          </>
+        )}
       </div>
       <div className="navbar-right">
         <span className="navbar-username">{firstName}</span>

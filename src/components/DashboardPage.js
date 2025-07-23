@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGauge } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from './AuthContext';
 import ChangePasswordPrompt from './ChangePasswordPrompt';
+import InstructorDashboard from './InstructorDashboard';
 
 const mockHistory = [
   { id: 1, date: '2024-07-01 14:23', label: 'Attempt 1' },
@@ -24,6 +25,9 @@ const DashboardPage = () => {
 
   console.log("user reset ", user && !user.hasReset);
 
+  if (user && user.is_instructor) {
+    return <InstructorDashboard />;
+  }
   // If user is required to reset password, show overlay prompt
   if (user && !user.hasReset) {
     if (loading) {
@@ -53,6 +57,8 @@ const DashboardPage = () => {
     }
     return <ChangePasswordPrompt />;
   }
+
+  
 
   return (
     <div style={{
