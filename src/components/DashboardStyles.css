@@ -1,0 +1,128 @@
+/* DashboardStyles.css */
+
+.dashboard-page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #f7f9fc;
+  font-family: 'Inter', sans-serif;
+  padding: 3rem 1rem;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  color: #2d3748;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Assessment Card Styles */
+.assessment-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-height: 300px;
+  width: 100%;
+}
+
+
+
+
+.assessment-icon {
+  font-size: 2.8rem;
+  color: #4a90e2;
+  margin-bottom: 1.5rem;
+}
+
+.assessment-title {
+  color: #2d3748;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.assessment-btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+  letter-spacing: 0.025em;
+}
+
+
+.assessment-btn:hover {
+  background: #4a90e2;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Skeleton Styles for Assessment Card */
+.assessment-card-skeleton,
+.history-card-skeleton {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 400px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s infinite linear;
+}
+
+.skeleton-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-bottom: 24px;
+}
+
+.skeleton-title {
+  height: 28px;
+  width: 200px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.skeleton-button {
+  height: 48px;
+  width: 140px;
+  border-radius: 12px;
+}
+
+
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+} 

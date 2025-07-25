@@ -1,0 +1,352 @@
+.results-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 3rem;
+  background-color: #f8f9fa;
+  font-family: 'Inter', sans-serif;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.profile-card, .chart-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.profile-header {
+  border-bottom: 1px solid #eef2f7;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-name {
+  color: #1a237e;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile-date {
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.profile-description {
+  color: #4a5568;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.chart-title {
+  color: #1a237e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.chart-container {
+  display: flex;
+  height: 240px;
+  background-color: #fafbfc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  background-image: 
+    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.chart-scale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+.scale-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+  width: 30px;
+}
+
+.chart-area {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  margin-top: 10px;
+  position: relative;
+}
+
+.chart-baseline {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #374151;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.chart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end; /* Aligns label to bottom */
+  position: relative;
+  z-index: 2;
+}
+
+.chart-bar-container {
+  position: relative;
+  width: 40px;
+  height: 100%;
+  padding-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-bar {
+  width: 100%;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  cursor: pointer;
+}
+
+.chart-bar-positive {
+  bottom: 50%;
+  transform-origin: bottom;
+}
+
+.chart-bar-negative {
+  top: 50%;
+  transform-origin: top;
+}
+
+.chart-bar-zero {
+  border: 2px solid #4a90e2;
+  background-color: transparent !important;
+  position: absolute;
+  top: 50%;
+  transform: translateY(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.chart-bar-zero:hover {
+  opacity: 1;
+  border-color: #357abd;
+  transform: translateY(100%) scale(1.1);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.chart-bar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chart-value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2px 6px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-80%);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.chart-bar-positive .chart-value {
+  bottom: calc(100% + 8px);
+}
+
+.chart-bar-negative .chart-value {
+  bottom: calc(100% + 8px);
+}
+
+.chart-bar-zero .chart-value {
+  bottom: calc(100% + 8px);
+}
+
+.chart-bar:hover .chart-value {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.chart-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #374151;
+  margin-top: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chart-label:hover {
+  color: #1f2937;
+  transform: scale(1.1);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.detail-panel {
+  padding: 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.detail-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+}
+
+.panel-color-0 {
+  background-color: #ffffff;
+  border-color: #4a90e2;
+}
+
+.panel-color-1 {
+  background-color: #f8f9fa;
+  border-color: #e0e7ff;
+}
+
+.panel-label {
+  color: #2d3748;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.panel-icon {
+  color: #4a90e2;
+  font-size: 1rem;
+  width: 20px;
+}
+
+.panel-text {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Skeleton Styles */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s infinite linear;
+  border-radius: 6px;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.chart-title-skeleton {
+  width: 150px;
+  height: 24px;
+  margin: 0 auto 2rem auto;
+}
+
+.scale-label-skeleton {
+  width: 20px;
+  height: 12px;
+}
+
+.chart-bar-skeleton {
+  width: 40px;
+  height: 80px;
+}
+
+.chart-label-skeleton {
+  width: 20px;
+  height: 16px;
+  margin-top: 0.75rem;
+}
+
+.title-skeleton {
+  width: 200px;
+  height: 36px;
+  margin-bottom: 0.5rem;
+}
+
+.date-skeleton {
+  width: 150px;
+  height: 18px;
+}
+
+.description-skeleton {
+  width: 100%;
+  height: 60px;
+}
+
+.detail-panel-skeleton {
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #fff;
+}
+
+.panel-label-skeleton {
+  width: 120px;
+  height: 20px;
+  margin-bottom: 0.75rem;
+}
+
+.panel-text-skeleton {
+  width: 100%;
+  height: 40px;
+}
+
+.error-container {
+  justify-content: center;
+  text-align: center;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}

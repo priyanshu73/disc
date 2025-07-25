@@ -8,7 +8,7 @@ import { DEV_ANSWERS } from '../devAnswers';
 
 const GROUPS_PER_PAGE = 2;
 
-function SurveyForm() {
+function SurveyForm({ attemptNumber = 1 }) {
   const [answers, setAnswers] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -162,6 +162,7 @@ function SurveyForm() {
               </p>
               <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
                 <button
+                  type="button"
                   style={{
                     background: '#4a90e2',
                     color: '#fff',
@@ -173,11 +174,13 @@ function SurveyForm() {
                     cursor: 'pointer',
                     transition: 'background 0.2s',
                   }}
+                  
                   onClick={() => navigate('/dashboard')}
                 >
                   Back to Dashboard
                 </button>
                 <button
+                  type="button"
                   style={{
                     background: '#22c55e',
                     color: '#fff',
@@ -189,7 +192,7 @@ function SurveyForm() {
                     cursor: 'pointer',
                     transition: 'background 0.2s',
                   }}
-                  onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : '/results/1')}
+                  onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : `/results/${attemptNumber}`)}
                 >
                   View Results
                 </button>
@@ -236,7 +239,7 @@ function SurveyForm() {
           )}
         </div>
         {currentPage === totalPages - 1 && (
-          <button type="submit" style={{ marginTop: 24, minWidth: 120, background: submitting ? '#cbd5e1' : '#4a90e2', color: submitting ? '#a0aec0' : '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontWeight: 600, fontSize: '1.08rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} disabled={submitting || progress < 100}>
+          <button type="submit" style={{ marginTop: 24, minWidth: 120, background: submitting ? '#cbd5e1' : '#4a90e2', color: submitting ? '#a0aec0' : '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontWeight: 600, fontSize: '1.08rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} disabled={submitting || progress < 100 || submitted}>
             {submitting && (
               <span style={{
                 display: 'inline-block',

@@ -1,93 +1,171 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faSmile, faBullseye, faBalanceScale, faHandshake,
+  faBuilding, faExclamationTriangle, faTachometerAlt, faShieldAlt, faChartLine
+} from '@fortawesome/free-solid-svg-icons';
+import { getResultById } from '../config/api';
+import DiSCChart from './DiSCChart';
+import './ResultsPage.css';
 
-const mockProfiles = {
-  1: {
-    pattern: 'Practitioner',
-    description: 'You are a Practitioner! You excel at bringing people together, facilitating collaboration, and driving results with empathy and insight. You are adaptable, supportive, and a natural problem solver.',
-    chart: [30, 20, 25, 25], // D, I, S, C
-    date: '2024-07-01 14:23',
-  },
-  2: {
-    pattern: 'Practitioner',
-    description: 'You are a Practitioner! You excel at bringing people together, facilitating collaboration, and driving results with empathy and insight. You are adaptable, supportive, and a natural problem solver.',
-    chart: [25, 30, 20, 25],
-    date: '2024-07-10 09:15',
-  },
-  3: {
-    pattern: 'Practitioner',
-    description: 'You are a Practitioner! You excel at bringing people together, facilitating collaboration, and driving results with empathy and insight. You are adaptable, supportive, and a natural problem solver.',
-    chart: [20, 25, 30, 25],
-    date: '2024-07-15 18:42',
-  },
-};
-
-const chartColors = ['#2563eb', '#43e97b', '#b721ff', '#6b7280'];
-const chartLabels = ['Dominance', 'Influence', 'Steadiness', 'Conscientiousness'];
+// Chart constants moved to DiSCChart component
 
 const ResultsPage = () => {
+
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id } = useParams();
-  const navigate = useNavigate();
-  const profile = mockProfiles[id] || mockProfiles[1];
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        setLoading(true);
+        const response = await getResultById(id);
+        console.log(response.result);
+        setResult(response.result);
+      } catch (err) {
+        console.error('Failed to fetch result:', err);
+        setError('Failed to load result. Please try again.');
+      } finally {
+        setTimeout(() => setLoading(false), 750); 
+      }
+    };
+
+    if (id) {
+      fetchResult();
+    }
+  }, [id]);
+
+     const ResultSkeleton = () => (
+     <div className="results-page-container skeleton-container">
+       <div className="main-content">
+         {/* Chart card skeleton - simplified to match current structure */}
+         <div className="chart-card">
+           <div className="skeleton-shimmer chart-title-skeleton"></div>
+           <div className="chart-container">
+             <div className="chart-scale">
+               {[1, 2, 3, 4, 5].map((_, idx) => (
+                 <div key={idx} className="skeleton-shimmer scale-label-skeleton"></div>
+               ))}
+             </div>
+                           <div className="chart-area">
+                {[1, 2, 3, 4].map((_, idx) => (
+                 <div key={idx} className="chart-item">
+                   <div className="chart-bar-container">
+                     <div className="skeleton-shimmer chart-bar-skeleton"></div>
+                   </div>
+                   <div className="skeleton-shimmer chart-label-skeleton"></div>
+                 </div>
+               ))}
+             </div>
+           </div>
+         </div>
+
+         {/* Profile card skeleton */}
+         <div className="profile-card">
+           <div className="profile-header">
+             <div className="skeleton-shimmer title-skeleton"></div>
+             <div className="skeleton-shimmer date-skeleton"></div>
+           </div>
+           <div className="skeleton-shimmer description-skeleton"></div>
+         </div>
+       </div>
+
+       {/* Details grid skeleton */}
+       <div className="details-grid">
+         {[1, 2, 3, 4, 5, 6, 7, 8].map((_, idx) => (
+           <div key={idx} className="detail-panel-skeleton">
+             <div className="skeleton-shimmer panel-label-skeleton"></div>
+             <div className="skeleton-shimmer panel-text-skeleton"></div>
+           </div>
+         ))}
+       </div>
+     </div>
+   );
+
+  if (loading) {
+    return <ResultSkeleton />;
+  }
+
+  if (error || !result) {
+    return (
+             <div className="results-page-container error-container">
+         <div className="error-message">
+           {error || 'Result not found'}
+         </div>
+       </div>
+    );
+  }
+
+  const parseJsonSafely = (data) => {
+    if (typeof data === 'string') {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        return {};
+      }
+    }
+    return data || {};
+  };
+
+     const mostCounts = parseJsonSafely(result.most_counts);
+   const leastCounts = parseJsonSafely(result.least_counts);
+   
+   const chartData = [
+     (mostCounts.Z || 0) - (leastCounts.Z || 0), // D
+     (mostCounts.S || 0) - (leastCounts.S || 0), // I  
+     (mostCounts.T || 0) - (leastCounts.T || 0), // S
+     (mostCounts['*'] || 0) - (leastCounts['*'] || 0), // C
+   ];
+
+  const formattedDate = new Date(result.created_at).toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true
+  });
+
+  const profileItems = [
+    { label: 'Emotions', value: result.emotions, icon: faSmile },
+    { label: 'Goal', value: result.goal, icon: faBullseye },
+    { label: 'Judges Others By', value: result.judges_others_by, icon: faBalanceScale },
+    { label: 'Influences Others By', value: result.influences_others_by, icon: faHandshake },
+    { label: 'Value to Organization', value: result.value_to_organization, icon: faBuilding },
+    { label: 'Overuses', value: result.overuses, icon: faExclamationTriangle },
+    { label: 'Under Pressure', value: result.under_pressure, icon: faTachometerAlt },
+    { label: 'Fears', value: result.fears, icon: faShieldAlt },
+    { label: 'Would Increase Effectiveness Through', value: result.would_increase_effectiveness_through, icon: faChartLine },
+  ];
 
   return (
-    <div style={{
-      minHeight: '80vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      background: '#f7f8fa',
-      borderRadius: '18px',
-      boxShadow: '0 2px 8px rgba(31, 38, 135, 0.06)',
-      margin: '2rem',
-      padding: '2rem',
-    }}>
-      <button onClick={() => navigate('/dashboard')} style={{
-        alignSelf: 'flex-start',
-        marginBottom: '1.5rem',
-        background: 'none',
-        border: 'none',
-        color: '#2563eb',
-        fontWeight: 600,
-        fontSize: '1.1rem',
-        cursor: 'pointer',
-        textDecoration: 'underline',
-      }}>&larr; Back to Dashboard</button>
-      <div style={{
-        background: '#fff',
-        borderRadius: '12px',
-        boxShadow: '0 1px 4px rgba(80,112,255,0.06)',
-        border: '1px solid #e3e6ee',
-        padding: '2.2rem 2.5rem',
-        minWidth: '320px',
-        maxWidth: '480px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginBottom: '2.5rem',
-      }}>
-        <h1 style={{ color: '#1a237e', fontSize: '2rem', marginBottom: '0.5rem', fontWeight: 700 }}>{profile.pattern} Profile</h1>
-        <div style={{ color: '#6b7280', fontWeight: 500, marginBottom: '1.2rem' }}>{profile.date}</div>
-        <p style={{ color: '#22223b', fontSize: '1.08rem', textAlign: 'center', marginBottom: '1.5rem' }}>{profile.description}</p>
-        {/* Dummy Chart */}
-        <div style={{ display: 'flex', gap: '1.2rem', marginTop: '1rem', justifyContent: 'center', width: '100%' }}>
-          {profile.chart.map((val, idx) => (
-            <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '60px' }}>
-              <div style={{
-                width: '32px',
-                height: `${val * 2.2}px`,
-                background: chartColors[idx],
-                borderRadius: '7px 7px 0 0',
-                marginBottom: '0.4rem',
-                transition: 'height 0.5s',
-                boxShadow: '0 1px 2px rgba(80,112,255,0.04)',
-              }}></div>
-              <span style={{ fontSize: '0.93rem', color: '#555', marginTop: '0.2rem' }}>{chartLabels[idx]}</span>
-              <span style={{ fontWeight: 600, color: '#22223b', fontSize: '1.05rem' }}>{val}</span>
-            </div>
-          ))}
+         <div className="results-page-container">
+       <div className="main-content">
+         <DiSCChart chartData={chartData} />
+
+        <div className="profile-card">
+          <div className="profile-header">
+            <h1 className="profile-name">{result.pname}</h1>
+            <p className="profile-date">Completed on {formattedDate}</p>
+          </div>
+          <p className="profile-description">{result.general_description}</p>
         </div>
+      </div>
+
+      <div className="details-grid">
+        {profileItems.map((item, idx) => (
+          item.value && (
+            <div key={idx} className={`detail-panel panel-color-${idx % 2}`}>
+              <h3 className="panel-label">
+                <FontAwesomeIcon icon={item.icon} className="panel-icon" />
+                {item.label}
+              </h3>
+              <p className="panel-text">{item.value}</p>
+            </div>
+          )
+        ))}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ export const apiCall = async (endpoint, options = {}) => {
     credentials: 'include',
     ...options,
   };
-
+  console.log('API Call:', url, "how many times");
   //console.log('API Call:', url, defaultOptions);
   console.log('Cookies:', document.cookie);
 
@@ -84,5 +84,29 @@ export const changePassword = async (oldPassword, newPassword) => {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify({ oldPassword, newPassword })
+  });
+}; 
+
+// Get user results API function
+export const getResults = async () => {
+  return await apiCall('/results', {
+    method: 'GET',
+    credentials: 'include',
+  });
+};
+
+// Get specific result by ID API function
+export const getResultById = async (resultId) => {
+  return await apiCall(`/results/${resultId}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+}; 
+
+// Get instructor information (classes and students)
+export const getInstructorInfo = async () => {
+  return await apiCall('/instructors/info', {
+    method: 'GET',
+    credentials: 'include',
   });
 }; 

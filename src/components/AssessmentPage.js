@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import SurveyForm from './SurveyForm';
 import { useAuth } from './AuthContext';
 import ChangePasswordPrompt from './ChangePasswordPrompt';
@@ -6,7 +7,9 @@ import LoadingSpinner from './LoadingSpinner';
 
 const AssessmentPage = () => {
   const { user } = useAuth();
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
+  const attemptNumber = location.state?.attemptNumber || 1;
 
   // Simulate loading for prompt (match SurveyForm's loading duration)
   useEffect(() => {
@@ -29,8 +32,10 @@ const AssessmentPage = () => {
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center', margin: '32px 0 16px 0' }}>Take the DiSC Assessment</h2>
-      <SurveyForm />
+      <h2 style={{ textAlign: 'center', margin: '32px 0 16px 0' }}>
+        Take the DiSC Assessment {attemptNumber > 1 && `(Attempt ${attemptNumber})`}
+      </h2>
+      <SurveyForm attemptNumber={attemptNumber} />
     </div>
   );
 };
