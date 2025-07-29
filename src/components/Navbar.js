@@ -3,12 +3,13 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from './AuthContext';
+import NavbarSkeleton from './NavbarSkeleton';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { user, loading, logout } = useAuth();
   const firstName = user?.firstname || 'User';
 
   // Highlight active tab
@@ -19,6 +20,11 @@ const Navbar = () => {
     await logout();
     navigate('/login');
   };
+
+  // Show skeleton while loading
+  if (loading) {
+    return <NavbarSkeleton />;
+  }
 
   return (
     <nav className="navbar navbar-cool">

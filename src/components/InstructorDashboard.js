@@ -3,6 +3,7 @@ import { useAuth } from './AuthContext';
 import { getInstructorInfo } from '../config/api';
 import InstructorDashboardSkeleton from './InstructorDashboardSkeleton';
 import './InstructorDashboard.css';
+import ChangePasswordPrompt from './ChangePasswordPrompt';
 
 const InstructorDashboard = () => {
   const { user } = useAuth();
@@ -34,6 +35,16 @@ const InstructorDashboard = () => {
     fetchInstructorData();
   }, []);
 
+  if (user && !user.hasReset) {
+    // This part is for the password reset prompt, which is a full-screen overlay.
+    // We can show its own skeleton or a simple loading spinner.
+    if (loading) {
+      return (
+        <InstructorDashboardSkeleton />
+      );
+    }
+    return <ChangePasswordPrompt />;
+  }  
   const getStudentInitials = (firstname, lastname) => {
     return `${firstname?.charAt(0) || ''}${lastname?.charAt(0) || ''}`.toUpperCase();
   };
