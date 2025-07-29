@@ -106,6 +106,7 @@
   background: #f8f9fa;
   border-radius: 8px;
   transition: background-color 0.2s ease;
+  gap: 1rem;
 }
 
 .student-item:hover {
@@ -141,6 +142,26 @@
 .student-username {
   color: #7f8c8d;
   font-size: 0.85rem;
+}
+
+.view-results-btn {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.view-results-btn:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
 }
 
 .no-classes {

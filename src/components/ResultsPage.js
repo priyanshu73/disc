@@ -1,27 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faSmile, faBullseye, faBalanceScale, faHandshake,
   faBuilding, faExclamationTriangle, faTachometerAlt, faShieldAlt, faChartLine
 } from '@fortawesome/free-solid-svg-icons';
-import { getResultById } from '../config/api';
+import { getResultById, getStudentResultById } from '../config/api';
+import { useAuth } from './AuthContext';
 import DiSCChart from './DiSCChart';
 import './ResultsPage.css';
 
 // Chart constants moved to DiSCChart component
 
 const ResultsPage = () => {
-
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { id } = useParams();
+  const { id, studentId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  
+  // Check if this is an instructor viewing a student's result
+  const isInstructorView = user?.is_instructor && studentId;
+  const studentName = location.state?.studentName || 'Student';
+
   useEffect(() => {
     const fetchResult = async () => {
       try {
         setLoading(true);
-        const response = await getResultById(id);
+        let response;
+        
+        if (isInstructorView) {
+          // Instructor viewing student result
+          response = await getStudentResultById(studentId, id);
+        } else {
+          // Regular user viewing their own result
+          response = await getResultById(id);
+        }
+        
         console.log(response.result);
         setResult(response.result);
       } catch (err) {
@@ -35,7 +52,15 @@ const ResultsPage = () => {
     if (id) {
       fetchResult();
     }
-  }, [id]);
+  }, [id, studentId, isInstructorView]);
+
+  const handleBack = () => {
+    if (isInstructorView) {
+      navigate(`/instructor/student/${studentId}`);
+    } else {
+      navigate('/dashboard');
+    }
+  };
 
      const ResultSkeleton = () => (
      <div className="results-page-container skeleton-container">
@@ -142,6 +167,15 @@ const ResultsPage = () => {
 
   return (
          <div className="results-page-container">
+       {isInstructorView && (
+         <div className="instructor-header">
+           <button className="back-btn" onClick={handleBack}>
+             ← Back to {studentName}'s History
+           </button>
+           <h2 className="instructor-title">{studentName}'s Assessment Result</h2>
+         </div>
+       )}
+       
        <div className="main-content">
          <DiSCChart chartData={chartData} />
 

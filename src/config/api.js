@@ -110,3 +110,18 @@ export const getInstructorInfo = async () => {
     credentials: 'include',
   });
 }; 
+
+export const getStudentResults = async (student_id) => {
+  return await apiCall(`/results?student_id=${student_id}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+};
+
+// Get specific student result by ID (for instructor viewing)
+export const getStudentResultById = async (studentId, resultId) => {
+  return await apiCall(`/results/${resultId}?student_id=${studentId}`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+};

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import { getInstructorInfo } from '../config/api';
 import InstructorDashboardSkeleton from './InstructorDashboardSkeleton';
@@ -7,6 +8,7 @@ import ChangePasswordPrompt from './ChangePasswordPrompt';
 
 const InstructorDashboard = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,6 +36,12 @@ const InstructorDashboard = () => {
 
     fetchInstructorData();
   }, []);
+
+  const handleViewStudentResults = (studentId, studentName) => {
+    navigate(`/instructor/student/${studentId}`, { 
+      state: { studentName, studentId } 
+    });
+  };
 
   if (user && !user.hasReset) {
     // This part is for the password reset prompt, which is a full-screen overlay.
@@ -134,6 +142,12 @@ const InstructorDashboard = () => {
                             @{student.username}
                           </div>
                         </div>
+                        <button 
+                          className="view-results-btn"
+                          onClick={() => handleViewStudentResults(student.user_id, `${student.firstname} ${student.lastname}`)}
+                        >
+                          View Results
+                        </button>
                       </div>
                     ))}
                   </div>
