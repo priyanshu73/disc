@@ -7,7 +7,7 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
-  const { login, loading, user } = useAuth();
+  const { login, loading} = useAuth();
 
   useEffect(() => {
     const timer = setTimeout(() => setShowForm(true), 1000);
@@ -23,11 +23,8 @@ const LoginPage = () => {
     setError(null);
     const success = await login(form.username, form.password);
     if (success) {
-      if (user && user.is_instructor) {
-        navigate('/instructor');
-      } else {
-        navigate('/dashboard');
-      }
+      // Navigate to dashboard - the DashboardPage will handle instructor vs student routing
+      navigate('/dashboard');
     } else {
       setError('Invalid username or password');
     }

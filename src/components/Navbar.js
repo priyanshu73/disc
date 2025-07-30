@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear, faRightFromBracket, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faGear, faRightFromBracket, faBars, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from './AuthContext';
 import NavbarSkeleton from './NavbarSkeleton';
 import './Navbar.css';
@@ -38,13 +38,18 @@ const Navbar = () => {
     return <NavbarSkeleton />;
   }
 
+  // Don't render navbar if no user is logged in
+  if (!user) {
+    return null;
+  }
+
   return (
     <nav className="navbar navbar-cool">
       {/* Logo Section */}
       <div className="navbar-logo">
         <Link to="/" className="logo-link">
           <div className="logo-container">
-            <span className="logo-icon">🎯</span>
+            <img src="/faviconn.png" alt="GBURG CS DiSC Logo" className="logo-icon" />
             <span className="logo-text">GBURG CS DiSC</span>
           </div>
         </Link>
@@ -55,7 +60,7 @@ const Navbar = () => {
         {user?.is_instructor ? (
           <>
             <Link to="/" className={`navbar-link${isActive('/instructor') ? ' active' : ''}`}>Dashboard</Link>
-            {/* Add more instructor-specific links here if needed */}
+            <Link to="/students" className={`navbar-link${isActive('/students') ? ' active' : ''}`}>Students</Link>
           </>
         ) : (
           <>
@@ -71,7 +76,7 @@ const Navbar = () => {
           <span className="navbar-username">{firstName}</span>
           <div className="profile-dropdown" onClick={() => setDropdownOpen(!dropdownOpen)}>
             <div className="profile-avatar">
-              <span className="profile-icon" role="img" aria-label="profile">👤</span>
+              <FontAwesomeIcon icon={faUser} style={{color: "#ffffff"}} />
             </div>
             {dropdownOpen && (
               <div className="dropdown-menu">
@@ -101,16 +106,23 @@ const Navbar = () => {
           <span className="mobile-username">{firstName}</span>
         </div>
         <div className="mobile-nav-links">
-          {user?.is_instructor ? (
-            <>
-              <Link 
-                to="/" 
-                className={`mobile-nav-link${isActive('/instructor') ? ' active' : ''}`}
-                onClick={handleNavLinkClick}
-              >
-                Dashboard
-              </Link>
-            </>
+                     {user?.is_instructor ? (
+             <>
+               <Link 
+                 to="/" 
+                 className={`mobile-nav-link${isActive('/instructor') ? ' active' : ''}`}
+                 onClick={handleNavLinkClick}
+               >
+                 Dashboard
+               </Link>
+               <Link 
+                 to="/students" 
+                 className={`mobile-nav-link${isActive('/students') ? ' active' : ''}`}
+                 onClick={handleNavLinkClick}
+               >
+                 Students
+               </Link>
+             </>
           ) : (
             <>
               <Link 

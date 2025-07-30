@@ -87,7 +87,9 @@ const StudentResultsPage = () => {
   return (
     <div className="student-results-page">
       <div className="student-results-header">
-  
+      <button className="back-btn" onClick={() => navigate('/')}>
+            ← Back to Dashboard
+          </button>
         <h1 className="student-results-title">{studentName}'s Assessment History</h1>
         <p className="student-results-subtitle">
           View all assessment attempts and results for this student

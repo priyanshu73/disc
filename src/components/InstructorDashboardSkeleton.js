@@ -30,6 +30,7 @@ const InstructorDashboardSkeleton = () => {
                     <div className="skeleton skeleton-student-name"></div>
                     <div className="skeleton skeleton-student-username"></div>
                   </div>
+                  <div className="skeleton skeleton-button"></div>
                 </div>
               ))}
             </div>

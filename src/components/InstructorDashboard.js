@@ -93,10 +93,15 @@ const InstructorDashboard = () => {
   return (
     <div className="instructor-dashboard">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">Instructor Dashboard</h1>
-        <p className="dashboard-subtitle">
-          Welcome back, {user?.firstname} {user?.lastname} !
-        </p>
+        <div className="welcome-card">
+          <div className="welcome-emoji">👋</div>
+          <div className="welcome-content">
+            <h1 className="dashboard-title">Instructor Dashboard</h1>
+            <p className="dashboard-subtitle">
+              Welcome back, {user?.firstname} {user?.lastname}!
+            </p>
+          </div>
+        </div>
       </div>
 
       {error && (
@@ -128,11 +133,38 @@ const InstructorDashboard = () => {
               </div>
 
               <div className="students-section">
-                <div className="students-header">
-                  <h4 className="students-title">Students</h4>
-                  <span className="students-count">
-                    {classItem.students.length}
-                  </span>
+                                <div className="students-header">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <h4 className="students-title">Students</h4>
+                    <span className="students-count">
+                      {classItem.students.length}
+                    </span>
+                  </div>
+                  <button 
+                    onClick={() => navigate('/students')}
+                    style={{
+                      background: '#60a5fa',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.85rem',
+                      fontWeight: '500',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      whiteSpace: 'nowrap'
+                    }}
+                    onMouseOver={(e) => {
+                      e.target.style.transform = 'translateY(-1px)';
+                      e.target.style.background = '#3b82f6';
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.background = '#60a5fa';
+                    }}
+                  >
+                    ➕ Add Students
+                  </button>
                 </div>
 
                 {/* Search Input */}
@@ -151,11 +183,38 @@ const InstructorDashboard = () => {
                     textAlign: 'center', 
                     padding: '2rem', 
                     color: '#7f8c8d',
-                    background: '#f8f9fa',
-                    borderRadius: '8px',
-                    fontSize: '0.9rem'
+                    background: '#f7f8fa',
+                    borderRadius: '22px',
+                    fontSize: '0.9rem',
+                    border: '2px dashed #b4c6fc',
+                    boxShadow: '0 4px 24px 0 rgba(80, 112, 255, 0.10), 0 1.5px 4px 0 rgba(80, 112, 255, 0.08)'
                   }}>
-                    No students enrolled in this class yet.
+                    <p style={{ marginBottom: '1rem' }}>No students enrolled in this class yet.</p>
+                    <button 
+                      onClick={() => navigate('/students')}
+                      style={{
+                        background: '#4f8cff',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        padding: '0.75rem 1.5rem',
+                        fontSize: '0.9rem',
+                        fontWeight: '500',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        boxShadow: '0 4px 16px rgba(80, 112, 255, 0.15)'
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.transform = 'translateY(-1px)';
+                        e.target.style.boxShadow = '0 8px 32px 0 rgba(80, 112, 255, 0.18), 0 3px 8px 0 rgba(80, 112, 255, 0.12)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = '0 4px 16px rgba(80, 112, 255, 0.15)';
+                      }}
+                    >
+                      Add Students
+                    </button>
                   </div>
                 ) : (
                   <div className="students-list">

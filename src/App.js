@@ -8,6 +8,7 @@ import ResultsPage from './components/ResultsPage';
 import DashboardPage from './components/DashboardPage';
 import SettingsPage from './components/SettingsPage';
 import StudentResultsPage from './components/StudentResultsPage';
+import StudentsPage from './components/StudentsPage';
 import { AuthProvider, ProtectedRoute } from './components/AuthContext';
 
 function App() {
@@ -27,8 +28,10 @@ function App() {
         {/* Instructor routes */}
         <Route path="/instructor/student/:studentId" element={<ProtectedRoute><StudentResultsPage /></ProtectedRoute>} />
         <Route path="/instructor/student/:studentId/result/:id" element={<ProtectedRoute><ResultsPage /></ProtectedRoute>} />
+        <Route path="/students" element={<ProtectedRoute><StudentsPage /></ProtectedRoute>} />
         
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/instructor" element={<Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </>

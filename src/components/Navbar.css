@@ -4,8 +4,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
-  background: linear-gradient(135deg, #eeeeee 0%, #123870 100%);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #1e293b;
+  box-shadow: 0 4px 24px 0 rgba(30, 41, 59, 0.25), 0 1.5px 4px 0 rgba(30, 41, 59, 0.15);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -31,8 +31,10 @@
 }
 
 .logo-icon {
-  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  object-fit: contain;
 }
 
 .logo-text {
@@ -198,7 +200,7 @@
 .dropdown-item {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 16px);
   padding: 12px 20px;
   background: none;
   border: none;
@@ -213,6 +215,7 @@
   margin: 0 8px;
   transition: all 0.2s ease;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .dropdown-item.logout-btn {
@@ -220,14 +223,15 @@
 }
 
 .dropdown-item:hover {
-  background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
-  transform: translateX(3px);
+  background: rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+  transform: translateX(2px);
 }
 
 .dropdown-item.logout-btn:hover {
   background: rgba(220, 38, 38, 0.1);
   color: #dc2626;
+  transform: translateX(2px);
 }
 
 /* Mobile Hamburger Menu */
@@ -240,12 +244,12 @@
 }
 
 .mobile-menu-toggle:hover {
-  background-color: #f1f5f9;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .hamburger-icon {
   font-size: 1.5rem;
-  color: #2563eb;
+  color: #ffffff;
   transition: transform 0.2s ease;
 }
 
@@ -256,7 +260,7 @@
   right: -300px;
   width: 280px;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #1e293b;
   box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
   z-index: 1001;
   transition: right 0.3s ease;
@@ -369,7 +373,8 @@
   }
   
   .logo-icon {
-    font-size: 1.8rem;
+    width: 1.8rem;
+    height: 1.8rem;
   }
   
   .navbar-link {
@@ -394,7 +399,8 @@
   }
   
   .logo-icon {
-    font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
   }
   
   /* Hide desktop navigation on mobile */
