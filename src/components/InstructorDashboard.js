@@ -12,6 +12,7 @@ const InstructorDashboard = () => {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerms, setSearchTerms] = useState({});
 
   useEffect(() => {
     const fetchInstructorData = async () => {
@@ -41,6 +42,24 @@ const InstructorDashboard = () => {
     navigate(`/instructor/student/${studentId}`, { 
       state: { studentName, studentId } 
     });
+  };
+
+  const handleSearchChange = (classId, searchTerm) => {
+    setSearchTerms(prev => ({
+      ...prev,
+      [classId]: searchTerm
+    }));
+  };
+
+  const getFilteredStudents = (students, classId) => {
+    const searchTerm = searchTerms[classId] || '';
+    if (!searchTerm.trim()) return students;
+    
+    return students.filter(student => 
+      student.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   };
 
   if (user && !user.hasReset) {
@@ -116,6 +135,17 @@ const InstructorDashboard = () => {
                   </span>
                 </div>
 
+                {/* Search Input */}
+                <div className="students-search">
+                  <input
+                    type="text"
+                    placeholder="Search students by name or username..."
+                    value={searchTerms[classItem.class_id] || ''}
+                    onChange={(e) => handleSearchChange(classItem.class_id, e.target.value)}
+                    className="students-search-input"
+                  />
+                </div>
+
                 {classItem.students.length === 0 ? (
                   <div style={{ 
                     textAlign: 'center', 
@@ -129,7 +159,7 @@ const InstructorDashboard = () => {
                   </div>
                 ) : (
                   <div className="students-list">
-                    {classItem.students.map((student) => (
+                    {getFilteredStudents(classItem.students, classItem.class_id).map((student) => (
                       <div key={student.user_id} className="student-item">
                         <div className="student-avatar">
                           {getStudentInitials(student.firstname, student.lastname)}

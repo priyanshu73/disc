@@ -1,0 +1,371 @@
+/* Survey Form Container */
+.survey-form-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Loading State */
+.survey-loading {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.survey-loading-text {
+  margin-top: 20px;
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Dev Autofill Button */
+.dev-autofill-btn {
+  margin: 16px auto 0 auto;
+  display: block;
+  background: #e0e7ff;
+  color: #22223b;
+  border: 1px solid #a5b4fc;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dev-autofill-btn:hover {
+  background: #c7d2fe;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(165, 180, 252, 0.3);
+}
+
+/* Survey Form */
+.survey-form {
+  position: relative;
+  width: 100%;
+}
+
+/* Survey Content Container */
+.survey-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Submit Button */
+.survey-submit-btn {
+  margin-top: 24px;
+  min-width: 120px;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+.survey-submit-btn:hover:not(:disabled) {
+  background: #357abd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3);
+}
+
+.survey-submit-btn:disabled {
+  background: #cbd5e1 !important;
+  color: #a0aec0 !important;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Submit Button Loading Spinner */
+.survey-submit-spinner {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.survey-submit-spinner-inner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid #e5e7eb;
+  border-top: 2.5px solid #38bdf8;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success Overlay */
+.survey-success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.survey-success-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.13);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.survey-success-title {
+  color: #38bdf8;
+  font-weight: 700;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+.survey-success-message {
+  color: #4a5568;
+  margin-bottom: 28px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.survey-success-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.survey-success-btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1.08rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  min-width: 120px;
+}
+
+.survey-success-btn:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+}
+
+.survey-success-btn.secondary {
+  background: #22c55e;
+}
+
+.survey-success-btn.secondary:hover {
+  background: #16a34a;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .survey-form-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .survey-form-container {
+    padding: 12px;
+  }
+  
+  .survey-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .survey-form-container {
+    padding: 10px;
+  }
+  
+  .survey-loading {
+    padding: 30px 15px;
+  }
+  
+  .survey-loading-text {
+    font-size: 0.95rem;
+  }
+  
+  .dev-autofill-btn {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    margin: 12px auto 0 auto;
+  }
+  
+  .survey-submit-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+  
+  .survey-success-modal {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .survey-success-title {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .survey-success-message {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  
+  .survey-success-buttons {
+    gap: 12px;
+  }
+  
+  .survey-success-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .survey-form-container {
+    padding: 8px;
+  }
+  
+  .survey-loading {
+    padding: 20px 10px;
+  }
+  
+  .survey-loading-text {
+    font-size: 0.9rem;
+  }
+  
+  .dev-autofill-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    margin: 8px auto 0 auto;
+  }
+  
+  .survey-submit-btn {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    min-width: 80px;
+    margin-top: 20px;
+  }
+  
+  .survey-submit-spinner-inner {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+  }
+  
+  .survey-success-modal {
+    padding: 1.5rem 1rem 1rem 1rem;
+    margin: 0.5rem;
+  }
+  
+  .survey-success-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .survey-success-message {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  
+  .survey-success-buttons {
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .survey-success-btn {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+    min-width: 120px;
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 360px) {
+  .survey-form-container {
+    padding: 5px;
+  }
+  
+  .survey-loading {
+    padding: 15px 8px;
+  }
+  
+  .survey-loading-text {
+    font-size: 0.85rem;
+  }
+  
+  .dev-autofill-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    margin: 6px auto 0 auto;
+  }
+  
+  .survey-submit-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    min-width: 70px;
+    margin-top: 16px;
+  }
+  
+  .survey-success-modal {
+    padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+    margin: 0.25rem;
+  }
+  
+  .survey-success-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  
+  .survey-success-message {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  
+  .survey-success-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+} 

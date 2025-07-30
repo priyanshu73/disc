@@ -5,6 +5,7 @@ import { submitAnswers, fetchDiscQuestions } from '../config/api';
 import LoadingSpinner from './LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 import { DEV_ANSWERS } from '../devAnswers';
+import './SurveyForm.css';
 
 const GROUPS_PER_PAGE = 2;
 
@@ -83,9 +84,9 @@ function SurveyForm({ attemptNumber = 1 }) {
   // Show loading spinner while fetching questions
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: '50px' }}>
+      <div className="survey-loading">
         <LoadingSpinner size="large" color="#4ade80" />
-        <p style={{ marginTop: '20px', color: '#666' }}>Loading survey questions...</p>
+        <p className="survey-loading-text">Loading survey questions...</p>
       </div>
     );
   }
@@ -111,87 +112,36 @@ function SurveyForm({ attemptNumber = 1 }) {
   const currentQuestions = discQuestions.slice(startIdx, endIdx);
 
   return (
-    <>
+    <div className="survey-form-container">
       {process.env.NODE_ENV === 'development' && (
         <button
           type="button"
-          style={{
-            margin: '16px auto 0 auto',
-            display: 'block',
-            background: '#e0e7ff',
-            color: '#22223b',
-            border: '1px solid #a5b4fc',
-            borderRadius: 8,
-            padding: '10px 18px',
-            fontWeight: 600,
-            fontSize: '1rem',
-            cursor: 'pointer'
-          }}
+          className="dev-autofill-btn"
           onClick={handleDevAutofill}
         >
           Autofill All Answers (DEV)
         </button>
       )}
-      <form onSubmit={handleSubmit} style={{ position: 'relative' }}>
+      <form onSubmit={handleSubmit} className="survey-form">
         {/* Overlay after submit */}
         {submitted && (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(0,0,0,0.45)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 2000,
-          }}>
-            <div style={{
-              background: '#fff',
-              borderRadius: 16,
-              padding: '2.5rem 2.5rem 2rem 2.5rem',
-              boxShadow: '0 4px 32px rgba(0,0,0,0.13)',
-              maxWidth: 400,
-              width: '100%',
-              textAlign: 'center',
-            }}>
-              <h2 style={{ color: '#38bdf8', fontWeight: 700, marginBottom: 16 }}>Assessment Submitted!</h2>
-              <p style={{ color: '#4a5568', marginBottom: 28 }}>
+          <div className="survey-success-overlay">
+            <div className="survey-success-modal">
+              <h2 className="survey-success-title">Assessment Submitted!</h2>
+              <p className="survey-success-message">
                 Thank you for taking the assessment.<br />Your answers have been submitted successfully.
               </p>
-              <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
+              <div className="survey-success-buttons">
                 <button
                   type="button"
-                  style={{
-                    background: '#4a90e2',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '12px 24px',
-                    fontWeight: 600,
-                    fontSize: '1.08rem',
-                    cursor: 'pointer',
-                    transition: 'background 0.2s',
-                  }}
-                  
+                  className="survey-success-btn"
                   onClick={() => navigate('/dashboard')}
                 >
                   Back to Dashboard
                 </button>
                 <button
                   type="button"
-                  style={{
-                    background: '#22c55e',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 8,
-                    padding: '12px 24px',
-                    fontWeight: 600,
-                    fontSize: '1.08rem',
-                    cursor: 'pointer',
-                    transition: 'background 0.2s',
-                  }}
+                  className="survey-success-btn secondary"
                   onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : `/results/${attemptNumber}`)}
                 >
                   View Results
@@ -217,7 +167,7 @@ function SurveyForm({ attemptNumber = 1 }) {
             </div>
           </div>
         )}
-        <div style={{ maxWidth: 800, margin: '0 auto' }}>
+        <div className="survey-content">
           {!submitted && (
             <>
               <div className="survey-groups-row">
@@ -239,35 +189,21 @@ function SurveyForm({ attemptNumber = 1 }) {
           )}
         </div>
         {currentPage === totalPages - 1 && (
-          <button type="submit" style={{ marginTop: 24, minWidth: 120, background: submitting ? '#cbd5e1' : '#4a90e2', color: submitting ? '#a0aec0' : '#fff', border: 'none', borderRadius: 8, padding: '12px 24px', fontWeight: 600, fontSize: '1.08rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }} disabled={submitting || progress < 100 || submitted}>
+          <button 
+            type="submit" 
+            className="survey-submit-btn"
+            disabled={submitting || progress < 100 || submitted}
+          >
             {submitting && (
-              <span style={{
-                display: 'inline-block',
-                verticalAlign: 'middle',
-                marginRight: 10,
-              }}>
-                <span style={{
-                  width: 18,
-                  height: 18,
-                  border: '2.5px solid #e5e7eb',
-                  borderTop: '2.5px solid #38bdf8',
-                  borderRadius: '50%',
-                  display: 'inline-block',
-                  animation: 'spin 1s linear infinite',
-                }} />
-                <style>{`
-                  @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                  }
-                `}</style>
+              <span className="survey-submit-spinner">
+                <span className="survey-submit-spinner-inner" />
               </span>
             )}
             {submitting ? 'Submitting...' : 'Submit'}
           </button>
         )}
       </form>
-    </>
+    </div>
   );
 }
 

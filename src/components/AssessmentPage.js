@@ -4,6 +4,7 @@ import SurveyForm from './SurveyForm';
 import { useAuth } from './AuthContext';
 import ChangePasswordPrompt from './ChangePasswordPrompt';
 import LoadingSpinner from './LoadingSpinner';
+import './AssessmentPage.css';
 
 const AssessmentPage = () => {
   const { user } = useAuth();
@@ -21,9 +22,9 @@ const AssessmentPage = () => {
   if (user && !user.hasReset) {
     if (loading) {
       return (
-        <div style={{ textAlign: 'center', padding: '50px' }}>
+        <div className="assessment-loading">
           <LoadingSpinner size="large" color="#4ade80" />
-          <p style={{ marginTop: '20px', color: '#666' }}>Loading assessment...</p>
+          <p className="assessment-loading-text">Loading assessment...</p>
         </div>
       );
     }
@@ -31,9 +32,9 @@ const AssessmentPage = () => {
   }
 
   return (
-    <div>
-      <h2 style={{ textAlign: 'center', margin: '32px 0 16px 0' }}>
-        Take the DiSC Assessment {attemptNumber > 1 && `(Attempt ${attemptNumber})`}
+    <div className="assessment-page">
+      <h2 className="assessment-title">
+        Take the DiSC Assessment {attemptNumber > 1 && <span className="assessment-title-attempt">(Attempt {attemptNumber})</span>}
       </h2>
       <SurveyForm attemptNumber={attemptNumber} />
     </div>
