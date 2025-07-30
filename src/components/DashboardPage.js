@@ -59,9 +59,14 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-page-container">
-      <h1 className="welcome-title">
-        Welcome, {firstName}!
-      </h1>
+      <div className="welcome-card">
+        <div className="welcome-emoji">👋</div>
+        <div className="welcome-content">
+          <h1 className="welcome-title">
+            Welcome, {firstName}!
+          </h1>
+        </div>
+      </div>
       <div className="dashboard-grid">
         {/* The Assessment card and its skeleton */}
         {loading ? (

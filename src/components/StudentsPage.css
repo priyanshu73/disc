@@ -38,11 +38,7 @@
   transition: all 0.3s ease;
 }
 
-.upload-section:hover {
-  transform: translateY(-3px) scale(1.015);
-  box-shadow: 0 8px 32px 0 rgba(80, 112, 255, 0.18), 0 3px 8px 0 rgba(80, 112, 255, 0.12);
-  border: 1.5px solid #b4c6fc;
-}
+
 
 .section-title {
   color: #1e293b;
@@ -103,12 +99,6 @@
   text-align: center;
 }
 
-.file-upload-label:hover {
-  border-color: #4f8cff;
-  background: #f7f8fa;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(80, 112, 255, 0.15);
-}
 
 .upload-icon {
   font-size: 3rem;

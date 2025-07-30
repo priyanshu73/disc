@@ -75,11 +75,6 @@
   position: relative;
 }
 
-.class-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border-color: #b4c6fc;
-}
 
 .class-header {
   background: #f7f8fa;
