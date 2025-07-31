@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import { getInstructorInfo } from '../config/api';
 import InstructorDashboardSkeleton from './InstructorDashboardSkeleton';
+import ClassCard from './ClassCard';
 import './InstructorDashboard.css';
 import ChangePasswordPrompt from './ChangePasswordPrompt';
 
@@ -12,7 +13,6 @@ const InstructorDashboard = () => {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerms, setSearchTerms] = useState({});
 
   useEffect(() => {
     const fetchInstructorData = async () => {
@@ -38,28 +38,16 @@ const InstructorDashboard = () => {
     fetchInstructorData();
   }, []);
 
-  const handleViewStudentResults = (studentId, studentName) => {
-    navigate(`/instructor/student/${studentId}`, { 
-      state: { studentName, studentId } 
-    });
-  };
-
-  const handleSearchChange = (classId, searchTerm) => {
-    setSearchTerms(prev => ({
-      ...prev,
-      [classId]: searchTerm
-    }));
-  };
-
-  const getFilteredStudents = (students, classId) => {
-    const searchTerm = searchTerms[classId] || '';
-    if (!searchTerm.trim()) return students;
+  const handleRefetchClasses = async () => {
     
-    return students.filter(student => 
-      student.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.lastname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.username.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    try {
+      const response = await getInstructorInfo();
+      setClasses(response.classes || []);
+    } catch (err) {
+      console.error('Error refetching classes:', err);
+    } finally {
+      
+    }
   };
 
   if (user && !user.hasReset) {
@@ -72,19 +60,7 @@ const InstructorDashboard = () => {
     }
     return <ChangePasswordPrompt />;
   }  
-  const getStudentInitials = (firstname, lastname) => {
-    return `${firstname?.charAt(0) || ''}${lastname?.charAt(0) || ''}`.toUpperCase();
-  };
 
-  const formatSemester = (semester) => {
-    const semesterMap = {
-      'S': 'Spring',
-      'F': 'Fall',
-      'Spring': 'Spring',
-      'Fall': 'Fall'
-    };
-    return semesterMap[semester] || semester;
-  };
 
   if (loading) {
     return <InstructorDashboardSkeleton />;
@@ -110,6 +86,27 @@ const InstructorDashboard = () => {
         </div>
       )}
 
+      {/* Add Students Section */}
+      <div className="add-students-section">
+        <div className="add-students-card">
+          <div className="add-students-content">
+            <div className="add-students-icon">👥</div>
+            <div className="add-students-text">
+              <h3 className="add-students-title">Manage Students</h3>
+              <p className="add-students-subtitle">
+                Upload CSV files to add students to your classes
+              </p>
+            </div>
+          </div>
+          <button 
+            onClick={() => navigate('/students')}
+            className="add-students-btn"
+          >
+            ✚ Add Students
+          </button>
+        </div>
+      </div>
+
       {classes.length === 0 ? (
         <div className="no-classes">
           <div className="no-classes-icon">📚</div>
@@ -121,128 +118,11 @@ const InstructorDashboard = () => {
       ) : (
         <div className="classes-container">
           {classes.map((classItem) => (
-            <div key={classItem.class_id} className="class-card">
-              <div className="class-header">
-                <h3 className="class-title">
-                  Classes 
-                </h3>
-                <div className="class-meta">
-                  <span>📅 {classItem.class_year}</span>
-                  <span>📘 {formatSemester(classItem.semester)}</span>
-                </div>
-              </div>
-
-              <div className="students-section">
-                                <div className="students-header">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <h4 className="students-title">Students</h4>
-                    <span className="students-count">
-                      {classItem.students.length}
-                    </span>
-                  </div>
-                  <button 
-                    onClick={() => navigate('/students')}
-                    style={{
-                      background: '#60a5fa',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '0.5rem 1rem',
-                      fontSize: '0.85rem',
-                      fontWeight: '500',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      whiteSpace: 'nowrap'
-                    }}
-                    onMouseOver={(e) => {
-                      e.target.style.transform = 'translateY(-1px)';
-                      e.target.style.background = '#3b82f6';
-                    }}
-                    onMouseOut={(e) => {
-                      e.target.style.transform = 'translateY(0)';
-                      e.target.style.background = '#60a5fa';
-                    }}
-                  >
-                    ➕ Add Students
-                  </button>
-                </div>
-
-                {/* Search Input */}
-                <div className="students-search">
-                  <input
-                    type="text"
-                    placeholder="Search students by name or username..."
-                    value={searchTerms[classItem.class_id] || ''}
-                    onChange={(e) => handleSearchChange(classItem.class_id, e.target.value)}
-                    className="students-search-input"
-                  />
-                </div>
-
-                {classItem.students.length === 0 ? (
-                  <div style={{ 
-                    textAlign: 'center', 
-                    padding: '2rem', 
-                    color: '#7f8c8d',
-                    background: '#f7f8fa',
-                    borderRadius: '22px',
-                    fontSize: '0.9rem',
-                    border: '2px dashed #b4c6fc',
-                    boxShadow: '0 4px 24px 0 rgba(80, 112, 255, 0.10), 0 1.5px 4px 0 rgba(80, 112, 255, 0.08)'
-                  }}>
-                    <p style={{ marginBottom: '1rem' }}>No students enrolled in this class yet.</p>
-                    <button 
-                      onClick={() => navigate('/students')}
-                      style={{
-                        background: '#4f8cff',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        padding: '0.75rem 1.5rem',
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                        boxShadow: '0 4px 16px rgba(80, 112, 255, 0.15)'
-                      }}
-                      onMouseOver={(e) => {
-                        e.target.style.transform = 'translateY(-1px)';
-                        e.target.style.boxShadow = '0 8px 32px 0 rgba(80, 112, 255, 0.18), 0 3px 8px 0 rgba(80, 112, 255, 0.12)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = '0 4px 16px rgba(80, 112, 255, 0.15)';
-                      }}
-                    >
-                      Add Students
-                    </button>
-                  </div>
-                ) : (
-                  <div className="students-list">
-                    {getFilteredStudents(classItem.students, classItem.class_id).map((student) => (
-                      <div key={student.user_id} className="student-item">
-                        <div className="student-avatar">
-                          {getStudentInitials(student.firstname, student.lastname)}
-                        </div>
-                        <div className="student-info">
-                          <div className="student-name">
-                            {student.firstname} {student.lastname}
-                          </div>
-                          <div className="student-username">
-                            @{student.username}
-                          </div>
-                        </div>
-                        <button 
-                          className="view-results-btn"
-                          onClick={() => handleViewStudentResults(student.user_id, `${student.firstname} ${student.lastname}`)}
-                        >
-                          View Results
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            <ClassCard 
+              key={classItem.class_id} 
+              classItem={classItem} 
+              onDelete={handleRefetchClasses}
+            />
           ))}
         </div>
       )}

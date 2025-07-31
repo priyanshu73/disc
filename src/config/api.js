@@ -131,7 +131,10 @@ export const uploadStudentsFile = async (file, classYear, semester) => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('classYear', classYear);
-  formData.append('semester', semester);
+  
+  // Convert semester to single character: Spring -> S, Fall -> F
+  const semesterChar = semester.toUpperCase() === 'SPRING' ? 'S' : 'F';
+  formData.append('semester', semesterChar);
 
   const url = `${API_BASE_URL}/upload-students`;
   
@@ -154,5 +157,14 @@ export const uploadStudentsFile = async (file, classYear, semester) => {
     console.error('File upload failed:', error);
     throw error;
   }
+};
+
+// Delete students API function
+export const deleteStudents = async (studentIds) => {
+  return await apiCall('/delete-students', {
+    method: 'DELETE',
+    credentials: 'include',
+    body: JSON.stringify({ studentIds })
+  });
 };
 

@@ -59,6 +59,98 @@
   margin: 0;
 }
 
+/* Add Students Section */
+.add-students-section {
+  margin-bottom: 2rem;
+}
+
+.add-students-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e1e8ed;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+
+
+.add-students-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.add-students-icon {
+  font-size: 2rem;
+  color: #4f8cff;
+  flex-shrink: 0;
+}
+
+.add-students-text {
+  flex: 1;
+}
+
+.add-students-title {
+  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.add-students-subtitle {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.add-students-btn {
+  background: #4f8cff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(80, 112, 255, 0.15);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.add-students-btn:hover {
+  background: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px 0 rgba(80, 112, 255, 0.18), 0 3px 8px 0 rgba(80, 112, 255, 0.12);
+}
+
+.add-students-btn:active {
+  transform: translateY(0);
+}
+
+/* No Students Message */
+.no-students-message {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+  background: #f7f8fa;
+  border-radius: 22px;
+  font-size: 0.9rem;
+  border: 2px dashed #b4c6fc;
+  box-shadow: 0 4px 24px 0 rgba(80, 112, 255, 0.10), 0 1.5px 4px 0 rgba(80, 112, 255, 0.08);
+}
+
+.no-students-message p {
+  margin: 0;
+}
+
 .classes-container {
   display: grid;
   gap: 2rem;
@@ -182,6 +274,92 @@
 
 .students-search:focus-within::before {
   color: #4f8cff;
+}
+
+/* Selection Controls */
+.selection-controls {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.selection-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.select-btn {
+  background: #4f8cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-btn:hover {
+  background: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.select-all-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.select-all-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.delete-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Student Checkbox */
+.student-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.75rem;
+  cursor: pointer;
+  accent-color: #4f8cff;
+  flex-shrink: 0;
 }
 
 .students-list {
@@ -313,6 +491,22 @@
     font-size: 2rem;
   }
   
+  .add-students-card {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .add-students-content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .add-students-btn {
+    width: 100%;
+  }
+  
   .classes-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -329,6 +523,25 @@
   .class-meta {
     flex-direction: column;
     gap: 0.5rem;
+  }
+  
+  .selection-controls {
+    padding: 0.5rem;
+  }
+  
+  .selection-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .selection-buttons button {
+    width: 100%;
+  }
+  
+  .delete-btn {
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
   }
 }
 

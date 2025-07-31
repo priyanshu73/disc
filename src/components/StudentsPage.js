@@ -139,7 +139,7 @@ const StudentsPage = () => {
       // Use the simple API function
       const result = await uploadStudentsFile(selectedFile, selectedYear, selectedSemester);
 
-      setUploadStatus(`Success! ${result.studentsAdded || 0} students uploaded successfully. They will receive an email with their login credentials.`);
+      setUploadStatus(`Success! ${result.students_inserted || 0} students uploaded successfully. They will receive an email with their login credentials.`);
       setSelectedFile(null);
       setCsvPreview(null);
       

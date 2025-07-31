@@ -69,8 +69,10 @@ function SurveyForm({ attemptNumber = 1 }) {
       console.log('Submitting answers:', answers);
       const response = await submitAnswers(answers);
       console.log('Server response:', response);
-      // If response contains a result id, store it for view results
-      setLastResultId(response?.resultId || null);
+   
+    
+      setLastResultId(response?.data?.resultId);
+      console.log('Last result id:', lastResultId);
       setTimeout(() => {
         setSubmitting(false);
         setSubmitted(true);
@@ -119,7 +121,7 @@ function SurveyForm({ attemptNumber = 1 }) {
           className="dev-autofill-btn"
           onClick={handleDevAutofill}
         >
-          Autofill All Answers (DEV)
+          Autofill All Answers (DEV) 
         </button>
       )}
       <form onSubmit={handleSubmit} className="survey-form">
@@ -142,9 +144,9 @@ function SurveyForm({ attemptNumber = 1 }) {
                 <button
                   type="button"
                   className="survey-success-btn secondary"
-                  onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : `/results/${attemptNumber}`)}
+                  onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : `/`)}
                 >
-                  View Results
+                  View Results {lastResultId}
                 </button>
               </div>
             </div>
