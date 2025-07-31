@@ -85,6 +85,12 @@
   margin-bottom: 2rem;
 }
 
+.file-upload-area.drag-over {
+  border-color: #4f8cff;
+  background: #f0f9ff;
+  transform: scale(1.02);
+}
+
 .file-upload-label {
   display: flex;
   flex-direction: column;
@@ -110,6 +116,12 @@
   color: #1e293b;
   font-size: 1.1rem;
   font-weight: 500;
+}
+
+.upload-hint {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
 .file-input {
@@ -215,6 +227,115 @@
   color: #dc2626;
 }
 
+.file-info {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border: 1px solid #e1e8ed;
+}
+
+.file-info h3 {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.file-info p {
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.clear-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.clear-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.csv-preview {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid #e1e8ed;
+}
+
+.csv-preview h3 {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.preview-table {
+  overflow-x: auto;
+}
+
+.preview-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.preview-table th,
+.preview-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.preview-table th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.preview-table td {
+  color: #6b7280;
+}
+
+.upload-loading {
+  margin: 1.5rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-loading span {
+  color: #6b7280;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #4f8cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .students-page {
@@ -270,5 +391,23 @@
   
   .csv-instructions {
     padding: 1rem;
+  }
+  
+  .csv-preview {
+    padding: 1rem;
+  }
+  
+  .preview-table {
+    font-size: 0.8rem;
+  }
+  
+  .preview-table th,
+  .preview-table td {
+    padding: 0.5rem;
+  }
+  
+  .file-info {
+    padding: 1rem;
+    margin: 10px;
   }
 } 

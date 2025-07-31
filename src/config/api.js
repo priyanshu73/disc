@@ -125,3 +125,34 @@ export const getStudentResultById = async (studentId, resultId) => {
     credentials: 'include',
   });
 };
+
+// File upload API function
+export const uploadStudentsFile = async (file, classYear, semester) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('classYear', classYear);
+  formData.append('semester', semester);
+
+  const url = `${API_BASE_URL}/upload-students`;
+  
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'include', // Include cookies for authentication
+      body: formData, // Don't set Content-Type header - browser will set it with boundary
+    });
+    
+    console.log('Upload Response status:', response.status);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `Upload failed with status: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('File upload failed:', error);
+    throw error;
+  }
+};
+
