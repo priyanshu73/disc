@@ -69,7 +69,7 @@ const ClassCard = ({ classItem, onDelete }) => {
 
     setIsDeleting(true);
     try {
-      await deleteStudents(selectedStudents);
+      await deleteStudents(selectedStudents, classItem.class_id);
       setSelectedStudents([]);
       setIsSelectionMode(false);
       // Trigger refetch in parent component

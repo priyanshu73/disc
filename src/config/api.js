@@ -160,11 +160,11 @@ export const uploadStudentsFile = async (file, classYear, semester) => {
 };
 
 // Delete students API function
-export const deleteStudents = async (studentIds) => {
+export const deleteStudents = async (studentIds, classId) => {
   return await apiCall('/delete-students', {
     method: 'DELETE',
     credentials: 'include',
-    body: JSON.stringify({ studentIds })
+    body: JSON.stringify({ studentIds, classId })
   });
 };
 

@@ -39,14 +39,19 @@ const InstructorDashboard = () => {
   }, []);
 
   const handleRefetchClasses = async () => {
+    // Set loading to true to show skeleton
+    setLoading(true);
+    setError(null);
     
     try {
       const response = await getInstructorInfo();
       setClasses(response.classes || []);
     } catch (err) {
       console.error('Error refetching classes:', err);
+      setError('Failed to refresh classes. Please try again.');
     } finally {
-      
+      // Set loading to false to hide skeleton
+      setLoading(false);
     }
   };
 
