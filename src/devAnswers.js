@@ -1,3 +1,5 @@
+import { discQuestions } from './questions';
+
 export const DEV_ANSWERS = {
     1: { most: 'Enthusiastic', least: 'Daring' },
     2: { most: 'Determined', least: 'Convincing' },
@@ -27,5 +29,23 @@ export const DEV_ANSWERS = {
     26: { most: 'Jovial', least: 'Precise' },
     27: { most: 'Restless', least: 'Restless' },
     28: { most: 'Respectful', least: 'Respectful' }
-  };
+};
+
+// Function to generate random dev answers
+export const getDevAnswers = () => {
+    const randomAnswers = {};
+    
+    discQuestions.forEach(question => {
+        const { adjectives } = question;
+        
+        // Randomly select two different adjectives
+        const shuffledAdjectives = [...adjectives].sort(() => Math.random() - 0.5);
+        const most = shuffledAdjectives[0];
+        const least = shuffledAdjectives[1];
+        
+        randomAnswers[question.id] = { most, least };
+    });
+    
+    return randomAnswers;
+};
   

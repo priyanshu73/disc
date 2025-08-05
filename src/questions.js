@@ -15,7 +15,7 @@ export const discQuestions = [
     { id: 14, adjectives: ['Fussy', 'Obedient', 'Firm', 'Playful'] },
     { id: 15, adjectives: ['Attractive', 'Introspective', 'Stubborn', 'Predictable'] },
     { id: 16, adjectives: ['Logical', 'Bold', 'Loyal', 'Charming'] },
-    { id: 17, adjectives: ['Sociable', 'Patient', 'Self-reliant', 'Self-spoken'] },
+    { id: 17, adjectives: ['Sociable', 'Patient', 'Self-reliant', 'Soft-spoken'] },
     { id: 18, adjectives: ['Willing', 'Eager', 'Thorough', 'High-spirited'] },
     { id: 19, adjectives: ['Aggressive', 'Extroverted', 'Amiable', 'Fearful'] },
     { id: 20, adjectives: ['Confident', 'Sympathetic', 'Impartial', 'Assertive'] },

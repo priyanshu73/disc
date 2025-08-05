@@ -4,7 +4,7 @@ import QuestionGroup from './QuestionGroup';
 import { submitAnswers, fetchDiscQuestions } from '../config/api';
 import LoadingSpinner from './LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
-import { DEV_ANSWERS } from '../devAnswers';
+import { getDevAnswers } from '../devAnswers';
 import './SurveyForm.css';
 
 const GROUPS_PER_PAGE = 2;
@@ -43,8 +43,9 @@ function SurveyForm({ attemptNumber = 1 }) {
 
   // Dev autofill handler
   const handleDevAutofill = () => {
-    setAnswers(DEV_ANSWERS);
-    setCurrentPage(Math.ceil(Object.keys(DEV_ANSWERS).length / GROUPS_PER_PAGE) - 1);
+    const randomAnswers = getDevAnswers();
+    setAnswers(randomAnswers);
+    setCurrentPage(Math.ceil(Object.keys(randomAnswers).length / GROUPS_PER_PAGE) - 1);
   };
 
   const handleAnswerChange = (questionId, type, value) => {
@@ -72,7 +73,7 @@ function SurveyForm({ attemptNumber = 1 }) {
    
     
       setLastResultId(response?.data?.resultId);
-      console.log('Last result id:', lastResultId);
+      
       setTimeout(() => {
         setSubmitting(false);
         setSubmitted(true);
@@ -144,9 +145,9 @@ function SurveyForm({ attemptNumber = 1 }) {
                 <button
                   type="button"
                   className="survey-success-btn secondary"
-                  onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : `/`)}
+                  onClick={() => navigate(lastResultId ? `/results/${lastResultId}` : `/dashboard`)}
                 >
-                  View Results {lastResultId}
+                  View Results
                 </button>
               </div>
             </div>
