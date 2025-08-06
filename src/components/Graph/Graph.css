@@ -1,665 +1,352 @@
-/* NEW GRID CHART STYLES */
-.chart-container {
-  background-color: #f8fafc;
-  border-radius: calc(12px * var(--chart-scale, 1));
-  border: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
-  box-shadow: 0 calc(8px * var(--chart-scale, 1)) calc(25px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  width: var(--chart-width, 100%);
-  height: var(--chart-height, auto);
-  max-width: calc(600px * var(--chart-scale, 1));
-  margin: 0 auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transform: scale(var(--chart-scale, 1));
-  transform-origin: top left;
-}
+/* =============================================================================
+   GRAPH.CSS - COMPLETE AND FIXED STYLESHEET
+   ============================================================================= */
 
-/* Example usage - you can override these CSS variables to control chart size */
-.chart-container {
-  --chart-width: 500px;
-  --chart-height: 100%;
-  --chart-scale: 1;
-}
+/* =============================================================================
+   MAIN CONTAINER AND LAYOUT
+   ============================================================================= */
 
-/* Example: Small chart */
-.chart-container.small {
-  --chart-width: 400px;
-  --chart-height: 300px;
-  --chart-scale: 0.8;
-}
-
-/* Example: Large chart */
-.chart-container.large {
-  --chart-width: 800px;
-  --chart-height: 600px;
-  --chart-scale: 1.5;
-}
-
-/* Chart Header */
-.chart-header {
-  background: white;
-  color: #374151;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1));
-  font-weight: bold;
-  font-size: calc(1.25rem * var(--chart-scale, 1));
-  letter-spacing: calc(0.5px * var(--chart-scale, 1));
-  text-transform: uppercase;
-  border-bottom: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
-}
-
-.chart-header-toggle {
-  display: flex;
-  justify-content: center;
-  gap: calc(0.5rem * var(--chart-scale, 1));
-  align-items: center;
-}
-
-.chart-header-toggle .graph-toggle-btn {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: calc(0.75rem * var(--chart-scale, 1)) calc(1.5rem * var(--chart-scale, 1));
-  font-size: calc(0.9rem * var(--chart-scale, 1));
-  font-weight: 500;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-width: calc(100px * var(--chart-scale, 1));
-  text-shadow: none;
-  text-transform: none;
-  letter-spacing: normal;
-  position: relative;
-  border-bottom: calc(3px * var(--chart-scale, 1)) solid transparent;
-}
-
-.chart-header-toggle .graph-toggle-btn:hover {
-  background: transparent;
-  color: #4a90e2;
-  border-bottom-color: #4a90e2;
-}
-
-.chart-header-toggle .graph-toggle-btn.active {
-  background: transparent;
-  color: #4a90e2;
-  font-weight: 600;
-  border-bottom-color: #4a90e2;
-}
-
-.chart-header-toggle .graph-toggle-btn.active:hover {
-  background: transparent;
-  color: #357abd;
-  border-bottom-color: #357abd;
-}
-
-.chart-header-text {
-  margin: 0;
-  text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
-}
-
-/* Main Content */
-.chart-main-content {
-  position: relative;
-}
-
-/* Headers */
-.chart-headers {
-  display: flex;
-}
-
-.intensity-header, .segment-header {
-  width: calc(64px * var(--chart-scale, 1));
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-  border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
-  font-weight: bold;
-}
-
-.header-text {
-  font-size: calc(0.7rem * var(--chart-scale, 1));
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: calc(0.5px * var(--chart-scale, 1));
-}
-
-.disc-headers {
-  display: flex;
-  flex: 1;
-}
-
-.disc-header {
-  flex: 1;
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-  border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
-  font-weight: bold;
-}
-
-.disc-header:last-child {
-  border-right: none;
-}
-
-.disc-header-text {
-  font-size: calc(1.5rem * var(--chart-scale, 1));
-  font-weight: bold;
-  text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
-}
-
-/* Grid Area */
-.chart-grid-area {
-  position: relative;
-  display: flex;
-  background: #ffffff;
-  width: 100%;
-  height: calc(580px * var(--chart-scale, 1));
-  border: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
-}
-
-.intensity-numbers {
-  width: calc(64px * var(--chart-scale, 1));
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  font-size: calc(0.625rem * var(--chart-scale, 1));
-}
-
-.intensity-number {
-  height: calc(20px * var(--chart-scale, 1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
-  font-size: calc(9px * var(--chart-scale, 1));
-  font-weight: 500;
-}
-
-.disc-grid {
-  display: flex;
-  flex: 1;
-}
-
-.disc-column {
-  flex: 1;
-  background: #ffffff;
-  border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
-}
-
-.disc-column:last-child {
-  border-right: none;
-}
-
-.grid-cell-new {
-  height: calc(20px * var(--chart-scale, 1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: calc(1px * var(--chart-scale, 1)) solid #f1f5f9;
-}
-
-.segment-numbers {
-  width: calc(64px * var(--chart-scale, 1));
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.segment-number {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
-  font-size: calc(1.25rem * var(--chart-scale, 1));
-  font-weight: bold;
-  text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
-}
-
-/* SVG Overlay */
-.chart-svg-overlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* Bottom Section */
-.chart-bottom {
-  display: flex;
-}
-
-.bottom-spacer {
-  width: calc(64px * var(--chart-scale, 1));
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-}
-
-.bottom-numbers {
-  display: flex;
-  flex: 1;
-}
-
-.bottom-number {
-  flex: 1;
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-  font-weight: bold;
-  font-size: calc(1.25rem * var(--chart-scale, 1));
-  text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
-}
-
-.bottom-label {
-  width: calc(64px * var(--chart-scale, 1));
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bottom-label-text {
-  font-size: calc(8px * var(--chart-scale, 1));
-  font-weight: bold;
-  line-height: 1.2;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: calc(0.5px * var(--chart-scale, 1));
-}
-
-/* Footer */
-.chart-footer {
-  display: flex;
-}
-
-.footer-left {
-  flex: 1;
-  background: #f8fafc;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1));
-  font-weight: bold;
-  font-size: calc(0.875rem * var(--chart-scale, 1));
-  color: #374151;
-  border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
-}
-
-.footer-right {
-  width: calc(64px * var(--chart-scale, 1));
-  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-  color: white;
-  text-align: center;
-  padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-label-text {
-  font-size: calc(8px * var(--chart-scale, 1));
-  font-weight: bold;
-  line-height: 1.2;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: calc(0.5px * var(--chart-scale, 1));
-}
-
-/* Segment Numbers Styles */
-.segment-numbers-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0;
-  margin-right: 0rem;
-  padding-top: calc(1.5rem * var(--chart-scale, 1));
-  border-top: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
-  gap: calc(2rem * var(--chart-scale, 1));
-  width: 100%;
-  max-width: calc(600px * var(--chart-scale, 1));
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.segment-numbers-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: calc(0.75rem * var(--chart-scale, 1));
-  width: calc(240px * var(--chart-scale, 1));
-  flex-shrink: 0;
-}
-
-.segment-number-box {
-  width: calc(50px * var(--chart-scale, 1));
-  height: calc(50px * var(--chart-scale, 1));
-  background: #4a90e2;
-  color: white;
-  border-radius: calc(8px * var(--chart-scale, 1));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: calc(1.1rem * var(--chart-scale, 1));
-  box-shadow: 0 calc(2px * var(--chart-scale, 1)) calc(8px * var(--chart-scale, 1)) rgba(74, 144, 226, 0.3);
-  transition: all 0.2s ease;
-}
-
-.segment-number-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 calc(4px * var(--chart-scale, 1)) calc(12px * var(--chart-scale, 1)) rgba(74, 144, 226, 0.4);
-}
-
-.segment-numbers-label {
-  color: #374151;
-  font-weight: 700;
-  font-size: calc(0.9rem * var(--chart-scale, 1));
-  text-transform: uppercase;
-  letter-spacing: calc(0.05em * var(--chart-scale, 1));
-}
-
-/* Responsive styles for mobile screens */
-@media (max-width: 768px) {
-  .chart-container {
-    --chart-scale: 0.8;
-    max-width: 95vw;
+   .chart-container {
+    background-color: #f8fafc;
+    border-radius: calc(12px * var(--chart-scale, 1));
+    border: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
+    box-shadow: 0 calc(8px * var(--chart-scale, 1)) calc(25px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    width: var(--chart-width, 100%);
+    height: var(--chart-height, auto);
+    max-width: calc(600px * var(--chart-scale, 1));
     margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transform: scale(var(--chart-scale, 1));
+    transform-origin: top left;
   }
-
+  
+  /* Default chart sizing */
+  .chart-container {
+    --chart-width: 100%;
+    --chart-height: auto;
+    --chart-scale: 1;
+  }
+  
+  /* =============================================================================
+     CHART HEADER AND NAVIGATION
+     ============================================================================= */
+  
   .chart-header {
-    padding: calc(0.5rem * var(--chart-scale, 1));
-    font-size: calc(1rem * var(--chart-scale, 1));
-  }
-
-  .chart-header-toggle .graph-toggle-btn {
-    padding: calc(0.5rem * var(--chart-scale, 1)) calc(1rem * var(--chart-scale, 1));
-    font-size: calc(0.8rem * var(--chart-scale, 1));
-    min-width: calc(80px * var(--chart-scale, 1));
-  }
-
-  .intensity-header, .segment-header {
-    width: calc(48px * var(--chart-scale, 1));
-    padding: calc(0.5rem * var(--chart-scale, 1)) calc(0.25rem * var(--chart-scale, 1));
-  }
-
-  .header-text {
-    font-size: calc(0.6rem * var(--chart-scale, 1));
-  }
-
-  .disc-header-text {
-    font-size: calc(1.2rem * var(--chart-scale, 1));
-  }
-
-  .chart-grid-area {
-    height: calc(400px * var(--chart-scale, 1));
-  }
-
-  .intensity-numbers {
-    width: calc(48px * var(--chart-scale, 1));
-    font-size: calc(0.5rem * var(--chart-scale, 1));
-  }
-
-  .intensity-number {
-    height: calc(14px * var(--chart-scale, 1));
-    font-size: calc(7px * var(--chart-scale, 1));
-  }
-
-  .grid-cell-new {
-    height: calc(14px * var(--chart-scale, 1));
-  }
-
-  .segment-numbers {
-    width: calc(48px * var(--chart-scale, 1));
-  }
-
-  .segment-number {
-    font-size: calc(1rem * var(--chart-scale, 1));
-  }
-
-  .bottom-spacer {
-    width: calc(48px * var(--chart-scale, 1));
-  }
-
-  .bottom-number {
-    padding: calc(0.5rem * var(--chart-scale, 1)) calc(0.25rem * var(--chart-scale, 1));
-    font-size: calc(1rem * var(--chart-scale, 1));
-  }
-
-  .bottom-label {
-    width: calc(48px * var(--chart-scale, 1));
-    padding: calc(0.5rem * var(--chart-scale, 1)) calc(0.25rem * var(--chart-scale, 1));
-  }
-
-  .bottom-label-text {
-    font-size: calc(6px * var(--chart-scale, 1));
-  }
-
-  .footer-left {
-    padding: calc(0.5rem * var(--chart-scale, 1));
-    font-size: calc(0.75rem * var(--chart-scale, 1));
-  }
-
-  .footer-right {
-    width: calc(48px * var(--chart-scale, 1));
-    padding: calc(0.5rem * var(--chart-scale, 1)) calc(0.25rem * var(--chart-scale, 1));
-  }
-
-  .footer-label-text {
-    font-size: calc(6px * var(--chart-scale, 1));
-  }
-
-  /* Segment numbers section responsive */
-  .segment-numbers-section {
-    flex-direction: column;
-    gap: calc(1rem * var(--chart-scale, 1));
-    align-items: center;
-    margin-right: 0;
-    padding-top: calc(1rem * var(--chart-scale, 1));
+    background: white;
+    color: #374151;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1));
+    font-weight: bold;
+    font-size: calc(1.25rem * var(--chart-scale, 1));
+    letter-spacing: calc(0.5px * var(--chart-scale, 1));
+    text-transform: uppercase;
+    border-bottom: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
   }
   
-  .segment-numbers-container {
-    width: calc(200px * var(--chart-scale, 1));
-    gap: calc(0.5rem * var(--chart-scale, 1));
-  }
-  
-  .segment-number-box {
-    width: calc(40px * var(--chart-scale, 1));
-    height: calc(40px * var(--chart-scale, 1));
-    font-size: calc(1rem * var(--chart-scale, 1));
-  }
-  
-  .segment-numbers-label {
-    font-size: calc(0.8rem * var(--chart-scale, 1));
-  }
-}
-
-@media (max-width: 480px) {
-  .chart-container {
-    --chart-scale: 0.6;
-    max-width: 98vw;
-  }
-
   .chart-header-toggle {
-    gap: calc(0.25rem * var(--chart-scale, 1));
-  }
-
-  .chart-header-toggle .graph-toggle-btn {
-    padding: calc(0.4rem * var(--chart-scale, 1)) calc(0.8rem * var(--chart-scale, 1));
-    font-size: calc(0.7rem * var(--chart-scale, 1));
-    min-width: calc(70px * var(--chart-scale, 1));
-  }
-
-  .intensity-header, .segment-header {
-    width: calc(40px * var(--chart-scale, 1));
-    padding: calc(0.4rem * var(--chart-scale, 1)) calc(0.2rem * var(--chart-scale, 1));
-  }
-
-  .header-text {
-    font-size: calc(0.5rem * var(--chart-scale, 1));
-  }
-
-  .disc-header-text {
-    font-size: calc(1rem * var(--chart-scale, 1));
-  }
-
-  .chart-grid-area {
-    height: calc(300px * var(--chart-scale, 1));
-  }
-
-  .intensity-numbers {
-    width: calc(40px * var(--chart-scale, 1));
-    font-size: calc(0.4rem * var(--chart-scale, 1));
-  }
-
-  .intensity-number {
-    height: calc(10px * var(--chart-scale, 1));
-    font-size: calc(6px * var(--chart-scale, 1));
-  }
-
-  .grid-cell-new {
-    height: calc(10px * var(--chart-scale, 1));
-  }
-
-  .segment-numbers {
-    width: calc(40px * var(--chart-scale, 1));
-  }
-
-  .segment-number {
-    font-size: calc(0.8rem * var(--chart-scale, 1));
-  }
-
-  .bottom-spacer {
-    width: calc(40px * var(--chart-scale, 1));
-  }
-
-  .bottom-number {
-    padding: calc(0.4rem * var(--chart-scale, 1)) calc(0.2rem * var(--chart-scale, 1));
-    font-size: calc(0.8rem * var(--chart-scale, 1));
-  }
-
-  .bottom-label {
-    width: calc(40px * var(--chart-scale, 1));
-    padding: calc(0.4rem * var(--chart-scale, 1)) calc(0.2rem * var(--chart-scale, 1));
-  }
-
-  .bottom-label-text {
-    font-size: calc(5px * var(--chart-scale, 1));
-  }
-
-  .footer-left {
-    padding: calc(0.4rem * var(--chart-scale, 1));
-    font-size: calc(0.6rem * var(--chart-scale, 1));
-  }
-
-  .footer-right {
-    width: calc(40px * var(--chart-scale, 1));
-    padding: calc(0.4rem * var(--chart-scale, 1)) calc(0.2rem * var(--chart-scale, 1));
-  }
-
-  .footer-label-text {
-    font-size: calc(5px * var(--chart-scale, 1));
-  }
-
-  /* Segment numbers section responsive */
-  .segment-numbers-container {
-    width: calc(180px * var(--chart-scale, 1));
-    gap: calc(0.4rem * var(--chart-scale, 1));
+    display: flex;
+    justify-content: center;
+    gap: calc(0.5rem * var(--chart-scale, 1));
+    align-items: center;
   }
   
-  .segment-number-box {
-    width: calc(35px * var(--chart-scale, 1));
-    height: calc(35px * var(--chart-scale, 1));
+  .chart-header-toggle .graph-toggle-btn {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(1.5rem * var(--chart-scale, 1));
     font-size: calc(0.9rem * var(--chart-scale, 1));
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: calc(100px * var(--chart-scale, 1));
+    position: relative;
+    border-bottom: calc(3px * var(--chart-scale, 1)) solid transparent;
   }
   
-  .segment-numbers-label {
-    font-size: calc(0.75rem * var(--chart-scale, 1));
+  .chart-header-toggle .graph-toggle-btn:hover {
+    background: transparent;
+    color: #4a90e2;
+    border-bottom-color: #4a90e2;
   }
-}
-
-@media (max-width: 360px) {
-  .chart-container {
-    --chart-scale: 0.5;
-    max-width: 100vw;
+  
+  .chart-header-toggle .graph-toggle-btn.active {
+    background: transparent;
+    color: #4a90e2;
+    font-weight: 600;
+    border-bottom-color: #4a90e2;
   }
-
-  .chart-header-toggle .graph-toggle-btn {
-    padding: calc(0.3rem * var(--chart-scale, 1)) calc(0.6rem * var(--chart-scale, 1));
-    font-size: calc(0.6rem * var(--chart-scale, 1));
-    min-width: calc(60px * var(--chart-scale, 1));
+  
+  /* =============================================================================
+     MAIN CONTENT LAYOUT
+     ============================================================================= */
+  
+  .chart-main-content {
+    position: relative;
   }
-
+  
+  /* =============================================================================
+     COLUMN HEADERS
+     ============================================================================= */
+  
+  .chart-headers {
+    display: flex;
+  }
+  
   .intensity-header, .segment-header {
-    width: calc(32px * var(--chart-scale, 1));
-    padding: calc(0.3rem * var(--chart-scale, 1)) calc(0.15rem * var(--chart-scale, 1));
+    width: calc(64px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    font-weight: bold;
   }
-
+  
   .header-text {
-    font-size: calc(0.4rem * var(--chart-scale, 1));
+    font-size: calc(0.7rem * var(--chart-scale, 1));
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: calc(0.5px * var(--chart-scale, 1));
   }
-
+  
+  .disc-headers {
+    display: flex;
+    flex: 1;
+  }
+  
+  .disc-header {
+    flex: 1;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+  }
+  
+  .disc-header:last-child {
+    border-right: none;
+  }
+  
   .disc-header-text {
-    font-size: calc(0.8rem * var(--chart-scale, 1));
+    font-size: calc(1.5rem * var(--chart-scale, 1));
+    font-weight: bold;
+    text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
   }
-
+  
+  /* =============================================================================
+     MAIN GRID AREA - FIXED HEIGHT
+     ============================================================================= */
+  
   .chart-grid-area {
-    height: calc(250px * var(--chart-scale, 1));
+    position: relative;
+    display: flex;
+    background: #ffffff;
+    width: 100%;
+    height: calc(560px * var(--chart-scale, 1)); /* Fixed height for 28 rows (28 * 20px) */
+    border-left: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
+    border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
+    overflow: hidden;
   }
-
+  
+  /* =============================================================================
+     INTENSITY NUMBERS (LEFT COLUMN)
+     ============================================================================= */
+  
   .intensity-numbers {
-    width: calc(32px * var(--chart-scale, 1));
-    font-size: calc(0.3rem * var(--chart-scale, 1));
+    width: calc(64px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
   }
-
+  
   .intensity-number {
-    height: calc(8px * var(--chart-scale, 1));
-    font-size: calc(5px * var(--chart-scale, 1));
+    height: calc(20px * var(--chart-scale, 1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    font-size: calc(9px * var(--chart-scale, 1));
+    font-weight: 500;
   }
-
+  
+  /* =============================================================================
+     DISC GRID COLUMNS (CENTER AREA)
+     ============================================================================= */
+  
+  .disc-grid {
+    display: flex;
+    flex: 1;
+  }
+  
+  .disc-column {
+    flex: 1;
+    background: #ffffff;
+    border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
+  }
+  
+  .disc-column:last-child {
+    border-right: none;
+  }
+  
   .grid-cell-new {
-    height: calc(8px * var(--chart-scale, 1));
+    height: calc(20px * var(--chart-scale, 1));
+    border-bottom: calc(1px * var(--chart-scale, 1)) solid #f1f5f9;
   }
-
+  
+  /* =============================================================================
+     SEGMENT NUMBERS (RIGHT COLUMN)
+     ============================================================================= */
+  
   .segment-numbers {
-    width: calc(32px * var(--chart-scale, 1));
+    width: calc(64px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
   }
-
+  
   .segment-number {
-    font-size: calc(0.6rem * var(--chart-scale, 1));
+    flex: 1; /* Allows segments to fill space evenly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    font-size: calc(1.25rem * var(--chart-scale, 1));
+    font-weight: bold;
+    text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
   }
-
+  
+  .segment-number:last-child {
+      border-bottom: none;
+  }
+  
+  /* =============================================================================
+     SVG OVERLAY FOR INTERACTIVE ELEMENTS
+     ============================================================================= */
+  
+  .chart-svg-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through overlay */
+  }
+  
+  .chart-svg-overlay > g {
+      pointer-events: auto; /* Enable pointer events only for graph elements */
+  }
+  
+  
+  /* =============================================================================
+     BOTTOM SECTION WITH SEGMENT VALUES - FIXED
+     ============================================================================= */
+  
+  .chart-bottom {
+    display: flex;
+    /* REMOVED margin-top which caused the overlap */
+  }
+  
   .bottom-spacer {
-    width: calc(32px * var(--chart-scale, 1));
+    width: calc(64px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
   }
-
+  
+  .bottom-numbers {
+    display: flex;
+    flex: 1;
+  }
+  
   .bottom-number {
-    padding: calc(0.3rem * var(--chart-scale, 1)) calc(0.15rem * var(--chart-scale, 1));
-    font-size: calc(0.6rem * var(--chart-scale, 1));
+    flex: 1;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    font-weight: bold;
+    font-size: calc(1.25rem * var(--chart-scale, 1));
+    text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
   }
-
+  
   .bottom-label {
-    width: calc(32px * var(--chart-scale, 1));
-    padding: calc(0.3rem * var(--chart-scale, 1)) calc(0.15rem * var(--chart-scale, 1));
+    width: calc(64px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
+  
   .bottom-label-text {
-    font-size: calc(4px * var(--chart-scale, 1));
+    font-size: calc(8px * var(--chart-scale, 1));
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(0.5px * var(--chart-scale, 1));
   }
-
+  
+  /* =============================================================================
+     FOOTER SECTION
+     ============================================================================= */
+  
+  .chart-footer {
+    display: flex;
+  }
+  
   .footer-left {
-    padding: calc(0.3rem * var(--chart-scale, 1));
-    font-size: calc(0.5rem * var(--chart-scale, 1));
+    flex: 1;
+    background: #f8fafc;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1));
+    font-weight: bold;
+    font-size: calc(0.875rem * var(--chart-scale, 1));
+    color: #374151;
+    border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
   }
-
+  
   .footer-right {
-    width: calc(32px * var(--chart-scale, 1));
-    padding: calc(0.3rem * var(--chart-scale, 1)) calc(0.15rem * var(--chart-scale, 1));
+    width: calc(64px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    color: white;
+    text-align: center;
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
+  
   .footer-label-text {
-    font-size: calc(4px * var(--chart-scale, 1));
+    font-size: calc(8px * var(--chart-scale, 1));
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: calc(0.5px * var(--chart-scale, 1));
   }
-} 
+  
+  /* =============================================================================
+     RESPONSIVE DESIGN - MOBILE BREAKPOINTS
+     ============================================================================= */
+  
+  @media (max-width: 768px) {
+    .chart-container {
+      --chart-scale: 0.8; /* Adjusted for better fit */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .chart-container {
+      --chart-scale: 0.6; /* Adjusted for better fit */
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .chart-container {
+      --chart-scale: 0.5; /* Adjusted for better fit */
+    }
+  }
