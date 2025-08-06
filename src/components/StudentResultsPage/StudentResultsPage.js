@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import { getStudentResults } from '../config/api';
-import HistoryCard from './HistoryCard';
+import { getStudentResults } from '../../config/api';
+import HistoryCard from '../HistoryCard/HistoryCard';
 import './StudentResultsPage.css';
 
 const StudentResultsPage = () => {

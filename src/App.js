@@ -1,14 +1,14 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import LoginPage from './components/LoginPage';
-import AssessmentPage from './components/AssessmentPage';
-import ResultsPage from './components/ResultsPage';
-import DashboardPage from './components/DashboardPage';
-import SettingsPage from './components/SettingsPage';
-import StudentResultsPage from './components/StudentResultsPage';
-import StudentsPage from './components/StudentsPage';
+import Navbar from './components/Navbar/Navbar';
+import LoginPage from './components/LoginPage/LoginPage';
+import AssessmentPage from './components/Assessment/AssessmentPage';
+import ResultsPage from './components/ResultsPage/ResultsPage';
+import DashboardPage from './components/Dashboard/DashboardPage';
+import SettingsPage from './components/SettingsPage/SettingsPage';
+import StudentResultsPage from './components/StudentResultsPage/StudentResultsPage';
+import StudentsPage from './components/StudentsPage/StudentsPage';
 import { AuthProvider, ProtectedRoute } from './components/AuthContext';
 
 function App() {

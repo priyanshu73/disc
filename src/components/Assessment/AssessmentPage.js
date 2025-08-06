@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import SurveyForm from './SurveyForm';
-import { useAuth } from './AuthContext';
-import ChangePasswordPrompt from './ChangePasswordPrompt';
-import LoadingSpinner from './LoadingSpinner';
+import SurveyForm from '../SurveyForm/SurveyForm';
+import { useAuth } from '../AuthContext';
+import ChangePasswordPrompt from '../ChangePasswordPrompt';
+import LoadingSpinner from '../LoadingSpinner';
 import './AssessmentPage.css';
 
 const AssessmentPage = () => {

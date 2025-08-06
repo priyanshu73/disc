@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import QuestionGroup from './QuestionGroup';   
-import { submitAnswers, fetchDiscQuestions } from '../config/api';
-import LoadingSpinner from './LoadingSpinner';
+import QuestionGroup from '../QuestionGroup';   
+import { submitAnswers, fetchDiscQuestions } from '../../config/api';
+import LoadingSpinner from '../LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
-import { getDevAnswers } from '../devAnswers';
+import { getDevAnswers } from '../../devAnswers';
 import './SurveyForm.css';
 
 const GROUPS_PER_PAGE = 2;

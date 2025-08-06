@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear, faRightFromBracket, faBars, faTimes, faUser } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../AuthContext';
 import NavbarSkeleton from './NavbarSkeleton';
 import './Navbar.css';
 

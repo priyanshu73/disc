@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGauge } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from './AuthContext';
-import { getResults } from '../config/api';
-import ChangePasswordPrompt from './ChangePasswordPrompt';
-import InstructorDashboard from './InstructorDashboard';
-import HistoryCard from './HistoryCard';
+import { useAuth } from '../AuthContext';
+import { getResults } from '../../config/api';
+import ChangePasswordPrompt from '../ChangePasswordPrompt';
+import InstructorDashboard from '../InstructorDashboard/InstructorDashboard';
+import HistoryCard from '../HistoryCard/HistoryCard';
 import './DashboardStyles.css';
 
 const DashboardPage = () => {

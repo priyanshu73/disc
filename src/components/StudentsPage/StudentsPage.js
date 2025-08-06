@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
-import { uploadStudentsFile } from '../config/api';
+import { useAuth } from '../AuthContext';
+import { uploadStudentsFile } from '../../config/api';
 import './StudentsPage.css';
 
 const StudentsPage = () => {

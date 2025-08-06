@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
-import { getInstructorInfo } from '../config/api';
+import { useAuth } from '../AuthContext';
+import { getInstructorInfo } from '../../config/api';
 import InstructorDashboardSkeleton from './InstructorDashboardSkeleton';
-import ClassCard from './ClassCard';
+import ClassCard from '../ClassCard';
 import './InstructorDashboard.css';
-import ChangePasswordPrompt from './ChangePasswordPrompt';
+import ChangePasswordPrompt from '../ChangePasswordPrompt';
 
 const InstructorDashboard = () => {
   const { user } = useAuth();

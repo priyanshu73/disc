@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from './AuthContext';
-import { changePassword } from '../config/api';
-import ChangePasswordSection from './ChangePasswordSection';
-import AccountInformationSection from './AccountInformationSection';
-import AccountInfoSkeleton from './AccountInfoSkeleton';
-import SidebarSkeleton from './SidebarSkeleton';
+import { useAuth } from '../AuthContext';
+import { changePassword } from '../../config/api';
+import ChangePasswordSection from '../ChangePasswordSection/ChangePasswordSection';
+import AccountInformationSection from '../AccountInfo/AccountInformationSection';
+import AccountInfoSkeleton from '../AccountInfo/AccountInfoSkeleton';
+import SidebarSkeleton from '../SidebarSkeleton';
 import './SettingsPage.css';
 
 

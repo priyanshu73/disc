@@ -5,9 +5,9 @@ import {
   faSmile, faBullseye, faBalanceScale, faHandshake,
   faBuilding, faExclamationTriangle, faTachometerAlt, faShieldAlt, faChartLine
 } from '@fortawesome/free-solid-svg-icons';
-import { getResultById, getStudentResultById } from '../config/api';
-import { useAuth } from './AuthContext';
-import DiSCChart from './DiSCChart';
+import { getResultById, getStudentResultById } from '../../config/api';
+import { useAuth } from '../AuthContext';
+import DiSCChart from '../DiSCChart';
 import './ResultsPage.css';
 
 // Chart constants moved to DiSCChart component
@@ -123,26 +123,44 @@ const ResultsPage = () => {
     );
   }
 
-  const parseJsonSafely = (data) => {
-    if (typeof data === 'string') {
-      try {
-        return JSON.parse(data);
-      } catch (e) {
-        return {};
-      }
-    }
-    return data || {};
-  };
+  // const parseJsonSafely = (data) => {
+  //   if (typeof data === 'string') {
+  //     try {
+  //       return JSON.parse(data);
+  //     } catch (e) {
+  //       return {};
+  //     }
+  //   }
+  //   return data || {};
+  // };
 
-     const mostCounts = parseJsonSafely(result.most_counts);
-   const leastCounts = parseJsonSafely(result.least_counts);
+     const mostCounts = result.most_counts;
+   const leastCounts = result.least_counts;
    
-   const chartData = [
-     (mostCounts.Z || 0) - (leastCounts.Z || 0), // D
-     (mostCounts.S || 0) - (leastCounts.S || 0), // I  
-     (mostCounts.T || 0) - (leastCounts.T || 0), // S
-     (mostCounts['*'] || 0) - (leastCounts['*'] || 0), // C
-   ];
+   // Chart data with comprehensive information for all graphs
+   const chartData = {
+     // Graph III: Differences (current implementation)
+     differences: [
+       (mostCounts.Z || 0) - (leastCounts.Z || 0), // D
+       (mostCounts.S || 0) - (leastCounts.S || 0), // I  
+       (mostCounts.T || 0) - (leastCounts.T || 0), // S
+       (mostCounts['*'] || 0) - (leastCounts['*'] || 0), // C
+     ],
+     // Graph I: Most counts
+     mostCounts: [
+       mostCounts.Z || 0, // D
+       mostCounts.S || 0, // I
+       mostCounts.T || 0, // S
+       mostCounts['*'] || 0, // C
+     ],
+     // Graph II: Least counts
+     leastCounts: [
+       leastCounts.Z || 0, // D
+       leastCounts.S || 0, // I
+       leastCounts.T || 0, // S
+       leastCounts['*'] || 0, // C
+     ]
+   };
 
   const formattedDate = new Date(result.created_at).toLocaleString('en-US', {
     year: 'numeric',
@@ -177,7 +195,7 @@ const ResultsPage = () => {
        )}
        
        <div className="main-content">
-         <DiSCChart chartData={chartData} />
+         <DiSCChart chartData={chartData} segno={result.segno} />
 
         <div className="profile-card">
           <div className="profile-header">
