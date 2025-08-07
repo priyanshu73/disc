@@ -137,11 +137,7 @@ const Graph = ({ chartData, chartType, segno }) => {
     return leftColumnWidth + (column * singleDiscColumnWidth) + (singleDiscColumnWidth / 2);
   };
 
-  const parseSegno = (segno) => {
-    if (!segno) return ["4", "3", "2", "5"]; // Default values
-    const digits = segno.toString().replace(/[^0-9]/g, '').split('');
-    return digits.slice(0, 4); // Take first 4 digits for D, I, S, C
-  };
+ 
 
   // =============================================================================
   // DATA PREPARATION
@@ -174,7 +170,7 @@ const Graph = ({ chartData, chartType, segno }) => {
     originalValue: segment.value
   }));
 
-  const segmentNumbers = parseSegno(segno);
+
 
   // =============================================================================
   // EVENT HANDLERS

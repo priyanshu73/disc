@@ -8,7 +8,6 @@ import {
 import { getResultById, getStudentResultById } from '../../config/api';
 import { useAuth } from '../AuthContext';
 import DiSCChart from '../DiSCChart';
-import { MostRanges, LeastRanges } from '../../disc_chart';
 import './ResultsPage.css';
 
 // Chart constants moved to DiSCChart component
