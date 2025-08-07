@@ -1,0 +1,142 @@
+.student-results-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-results-header {
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+}
+
+.back-btn {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.back-btn:hover {
+  background: #357abd;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.student-results-title {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.student-results-subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e1e8ed;
+  flex: 1;
+}
+
+.no-results-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #bdc3c7;
+}
+
+.no-results-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #5a6c7d;
+}
+
+.no-results-text {
+  font-size: 1rem;
+}
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1;
+}
+
+/* Skeleton styles */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.history-title-skeleton {
+  height: 2rem;
+  width: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.history-item-skeleton {
+  background: #f8f9fa;
+  border: 1px solid #eef2f7;
+  min-height: 72px;
+}
+
+.skeleton-label {
+  height: 1rem;
+  width: 80px;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-date {
+  height: 0.9rem;
+  width: 120px;
+}
+
+.skeleton-view-btn {
+  height: 36px;
+  width: 100px;
+  border-radius: 10px;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .student-results-page {
+    padding: 1rem;
+  }
+  
+  .student-results-title {
+    font-size: 2rem;
+  }
+} 

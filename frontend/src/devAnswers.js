@@ -1,0 +1,51 @@
+import { discQuestions } from './questions';
+
+export const DEV_ANSWERS = {
+    1: { most: 'Enthusiastic', least: 'Daring' },
+    2: { most: 'Determined', least: 'Convincing' },
+    3: { most: 'Friendly', least: 'Accurate' },
+    4: { most: 'Talkative', least: 'Controlled' },
+    5: { most: 'Insightful', least: 'Insightful' },
+    6: { most: 'Persuasive', least: 'Persuasive' },
+    7: { most: 'Conscientious', least: 'Conscientious' },
+    8: { most: 'Observant', least: 'Observant' },
+    9: { most: 'Tactful', least: 'Agreeable' },
+    10: { most: 'Brave', least: 'Inspiring' },
+    11: { most: 'Reserved', least: 'Obliging' },
+    12: { most: 'Stimulating', least: 'Kind' },
+    13: { most: 'Competitive', least: 'Considerate' },
+    14: { most: 'Fussy', least: 'Firm' },
+    15: { most: 'Introspective', least: 'Stubborn' },
+    16: { most: 'Bold', least: 'Loyal' },
+    17: { most: 'Patient', least: 'Self-reliant' },
+    18: { most: 'Willing', least: 'Eager' },
+    19: { most: 'Extroverted', least: 'Amiable' },
+    20: { most: 'Sympathetic', least: 'Impartial' },
+    21: { most: 'Generous', least: 'Animated' },
+    22: { most: 'Introverted', least: 'Forceful' },
+    23: { most: 'Refined', least: 'Vigorous' },
+    24: { most: 'Contended', least: 'Demanding' },
+    25: { most: 'Argumentative', least: 'Systematic' },
+    26: { most: 'Jovial', least: 'Precise' },
+    27: { most: 'Restless', least: 'Restless' },
+    28: { most: 'Respectful', least: 'Respectful' }
+};
+
+// Function to generate random dev answers
+export const getDevAnswers = () => {
+    const randomAnswers = {};
+    
+    discQuestions.forEach(question => {
+        const { adjectives } = question;
+        
+        // Randomly select two different adjectives
+        const shuffledAdjectives = [...adjectives].sort(() => Math.random() - 0.5);
+        const most = shuffledAdjectives[0];
+        const least = shuffledAdjectives[1];
+        
+        randomAnswers[question.id] = { most, least };
+    });
+    
+    return randomAnswers;
+};
+  
