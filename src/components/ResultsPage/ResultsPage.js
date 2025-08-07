@@ -8,6 +8,7 @@ import {
 import { getResultById, getStudentResultById } from '../../config/api';
 import { useAuth } from '../AuthContext';
 import DiSCChart from '../DiSCChart';
+import { MostRanges, LeastRanges } from '../../disc_chart';
 import './ResultsPage.css';
 
 // Chart constants moved to DiSCChart component
@@ -137,6 +138,12 @@ const ResultsPage = () => {
      const mostCounts = result.most_counts;
    const leastCounts = result.least_counts;
    
+   // Helper function to get segment from ranges
+   const getSegmentFromRanges = (ranges, value) => {
+     const found = ranges.find(r => value >= r.min && value <= r.max);
+     return found ? found.segment : null;
+   };
+   
    // Chart data with comprehensive information for all graphs
    const chartData = {
      // Graph III: Differences (current implementation)
@@ -146,14 +153,14 @@ const ResultsPage = () => {
        (mostCounts.T || 0) - (leastCounts.T || 0), // S
        (mostCounts['*'] || 0) - (leastCounts['*'] || 0), // C
      ],
-     // Graph I: Most counts
+     // Graph I: Most counts (raw values for segment calculation)
      mostCounts: [
        mostCounts.Z || 0, // D
        mostCounts.S || 0, // I
        mostCounts.T || 0, // S
        mostCounts['*'] || 0, // C
      ],
-     // Graph II: Least counts
+     // Graph II: Least counts (raw values for segment calculation)
      leastCounts: [
        leastCounts.Z || 0, // D
        leastCounts.S || 0, // I

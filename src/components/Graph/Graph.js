@@ -7,7 +7,7 @@
 
 
 import React, { useRef, useEffect, useState } from 'react';
-import { discRanges } from '../../disc_chart'; // Fixed import path
+import { discRanges, MostRanges, LeastRanges } from '../../disc_chart'; // Fixed import path
 import './Graph.css';
 
 /**
@@ -76,7 +76,7 @@ const Graph = ({ chartData, chartType, segno }) => {
   // =============================================================================
   // DATA PROCESSING FUNCTIONS
   // =============================================================================
-  const getSegmentForValue = (value, discType) => {
+  const getSegmentForValue = (value, discType, graphType) => {
     const discTypeMap = {
       'D': 'D',
       'I': 'i', // discRanges uses lowercase 'i'
@@ -84,7 +84,16 @@ const Graph = ({ chartData, chartType, segno }) => {
       'C': 'C'
     };
     const lookupType = discTypeMap[discType];
-    const ranges = discRanges[lookupType];
+    
+    let ranges;
+    if (graphType === 'I') {
+      ranges = MostRanges[lookupType];
+    } else if (graphType === 'II') {
+      ranges = LeastRanges[lookupType];
+    } else {
+      ranges = discRanges[lookupType]; // Graph III uses differences
+    }
+    
     if (!ranges) return 4; // Default to middle segment
     const found = ranges.find(r => value >= r.min && value <= r.max);
     return found ? found.segment : 4;
@@ -137,11 +146,18 @@ const Graph = ({ chartData, chartType, segno }) => {
   // =============================================================================
   // DATA PREPARATION
   // =============================================================================
-  const finalData = chartData?.differences || chartData || [45, 32, 28, 67];
+  let finalData;
+  if (activeGraphType === 'I') {
+    finalData = chartData?.mostCounts || [0, 0, 0, 0];
+  } else if (activeGraphType === 'II') {
+    finalData = chartData?.leastCounts || [0, 0, 0, 0];
+  } else {
+    finalData = chartData?.differences || [0, 0, 0, 0];
+  }
   
   const segments = finalData.map((value, idx) => {
     const discType = chartLabels[idx];
-    const segment = getSegmentForValue(value, discType);
+    const segment = getSegmentForValue(value, discType, activeGraphType);
     return {
       value,
       segment: segment,

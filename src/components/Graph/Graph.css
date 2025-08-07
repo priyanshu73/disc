@@ -14,7 +14,7 @@
     overflow: hidden;
     width: var(--chart-width, 100%);
     height: var(--chart-height, auto);
-    max-width: calc(600px * var(--chart-scale, 1));
+    max-width: calc(1200px * var(--chart-scale, 1));
     margin: 0 auto;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transform: scale(var(--chart-scale, 1));
@@ -23,7 +23,7 @@
   
   /* Default chart sizing */
   .chart-container {
-    --chart-width: 100%;
+    --chart-width: 108%;
     --chart-height: auto;
     --chart-scale: 1;
   }
@@ -76,7 +76,19 @@
     background: transparent;
     color: #4a90e2;
     font-weight: 600;
-    border-bottom-color: #4a90e2;
+    border-bottom: calc(3px * var(--chart-scale, 1)) solid #4a90e2;
+    position: relative;
+  }
+  
+  .chart-header-toggle .graph-toggle-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: calc(-3px * var(--chart-scale, 1));
+    left: 0;
+    right: 0;
+    height: calc(3px * var(--chart-scale, 1));
+    background: #4a90e2;
+    border-radius: calc(2px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) 0 0;
   }
   
   /* =============================================================================
@@ -93,23 +105,62 @@
   
   .chart-headers {
     display: flex;
+    border-radius: calc(12px * var(--chart-scale, 1)) calc(12px * var(--chart-scale, 1)) 0 0;
+    overflow: hidden;
+    border: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
+    border-bottom: none;
+    box-shadow: 
+      0 calc(-4px * var(--chart-scale, 1)) calc(8px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1),
+      0 calc(2px * var(--chart-scale, 1)) calc(4px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.05),
+      inset 0 calc(1px * var(--chart-scale, 1)) 0 rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .chart-headers::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+    pointer-events: none;
+    border-radius: calc(12px * var(--chart-scale, 1)) calc(12px * var(--chart-scale, 1)) 0 0;
   }
   
   .intensity-header, .segment-header {
     width: calc(64px * var(--chart-scale, 1));
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
     color: white;
     text-align: center;
-    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-    border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.25rem * var(--chart-scale, 1));
+    border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.15);
     font-weight: bold;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .intensity-header::after, .segment-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(2px * var(--chart-scale, 1));
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   }
   
   .header-text {
-    font-size: calc(0.7rem * var(--chart-scale, 1));
-    font-weight: bold;
+    font-size: calc(0.65rem * var(--chart-scale, 1));
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: calc(0.5px * var(--chart-scale, 1));
+    letter-spacing: calc(0.6px * var(--chart-scale, 1));
+    text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
   }
   
   .disc-headers {
@@ -119,12 +170,20 @@
   
   .disc-header {
     flex: 1;
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-    color: white;
+    background: #f1f5f9;
     text-align: center;
-    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
-    border-right: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    padding: calc(1.25rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
     font-weight: bold;
+    position: relative;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .disc-header:hover {
+    background: #e2e8f0;
   }
   
   .disc-header:last-child {
@@ -132,9 +191,19 @@
   }
   
   .disc-header-text {
-    font-size: calc(1.5rem * var(--chart-scale, 1));
-    font-weight: bold;
-    text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
+    font-size: calc(1.75rem * var(--chart-scale, 1));
+    font-weight: 800;
+    color: white;
+    letter-spacing: calc(0.5px * var(--chart-scale, 1));
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    padding: calc(0.5rem * var(--chart-scale, 1)) calc(1rem * var(--chart-scale, 1));
+    border-radius: calc(8px * var(--chart-scale, 1));
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    box-shadow: 0 calc(2px * var(--chart-scale, 1)) calc(4px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    min-width: calc(3rem * var(--chart-scale, 1));
+    display: inline-block;
   }
   
   /* =============================================================================
@@ -150,6 +219,7 @@
     border-left: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
     border-right: calc(1px * var(--chart-scale, 1)) solid #e2e8f0;
     overflow: hidden;
+    margin-top: calc(2px * var(--chart-scale, 1));
   }
   
   /* =============================================================================
@@ -158,7 +228,7 @@
   
   .intensity-numbers {
     width: calc(64px * var(--chart-scale, 1));
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
     color: white;
   }
   
@@ -167,9 +237,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    border-bottom: calc(0px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
     font-size: calc(9px * var(--chart-scale, 1));
     font-weight: 500;
+    position: relative;
+    z-index: 1;
   }
   
   /* =============================================================================
@@ -193,7 +265,7 @@
   
   .grid-cell-new {
     height: calc(20px * var(--chart-scale, 1));
-    border-bottom: calc(1px * var(--chart-scale, 1)) solid #f1f5f9;
+    border-bottom: calc(0.1px * var(--chart-scale, 1)) solid #f1f5f9;
   }
   
   /* =============================================================================
@@ -202,7 +274,7 @@
   
   .segment-numbers {
     width: calc(64px * var(--chart-scale, 1));
-    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
     color: white;
     display: flex;
     flex-direction: column;
@@ -213,7 +285,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: calc(1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
+    border-bottom: calc(0.1px * var(--chart-scale, 1)) solid rgba(255, 255, 255, 0.2);
     font-size: calc(1.25rem * var(--chart-scale, 1));
     font-weight: bold;
     text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
@@ -246,7 +318,8 @@
   
   .chart-bottom {
     display: flex;
-    /* REMOVED margin-top which caused the overlap */
+    background: #f8fafc;
+    /* Background to match chart container */
   }
   
   .bottom-spacer {
@@ -262,11 +335,13 @@
   .bottom-number {
     flex: 1;
     background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
-    color: white;
+    color: rgb(59, 38, 38);
     text-align: center;
     padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+   
     font-weight: bold;
     font-size: calc(1.25rem * var(--chart-scale, 1));
+   
     text-shadow: 0 calc(1px * var(--chart-scale, 1)) calc(2px * var(--chart-scale, 1)) rgba(0, 0, 0, 0.1);
   }
   
@@ -302,7 +377,9 @@
     flex: 1;
     background: #f8fafc;
     text-align: center;
-    padding: calc(0.75rem * var(--chart-scale, 1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
     font-size: calc(0.875rem * var(--chart-scale, 1));
     color: #374151;
@@ -314,7 +391,7 @@
     background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
     color: white;
     text-align: center;
-    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1));
+    padding: calc(0.75rem * var(--chart-scale, 1)) calc(0.5rem * var(--chart-scale, 1)); 
     display: flex;
     align-items: center;
     justify-content: center;

@@ -36,7 +36,85 @@ export const discRanges = {
       { min: -26, max: -9, segment: 1 },
     ]
   };
-  
+
+  export const MostRanges = {
+    D: [
+      { min: 11, max: 27, segment: 7 },
+      { min: 8, max: 10, segment: 6 },
+      { min: 6, max: 7, segment: 5 },
+      { min: 4, max: 5, segment: 4 },
+      { min: 2, max: 3, segment: 3 },
+      { min: 1, max: 1, segment: 2 },
+      { min: 0, max: 0, segment: 1 },
+    ],
+    i: [
+      { min: 11, max: 28, segment: 7 },
+      { min: 9, max: 10, segment: 6 },
+      { min: 8, max: 8, segment: 5 },
+      { min: 6, max: 7, segment: 4 },
+      { min: 4, max: 5, segment: 3 },
+      { min: 3, max: 3, segment: 2 },
+      { min: 0, max: 2, segment: 1 },
+    ],
+    S: [
+      { min: 13, max: 26, segment: 7 },
+      { min: 11, max: 12, segment: 6 },
+      { min: 9, max: 10, segment: 5 },
+      { min: 7, max: 8, segment: 4 },
+      { min: 5, max: 6, segment: 3 },
+      { min: 4, max: 4, segment: 2 },
+      { min: 0, max: 3, segment: 1 },
+    ],
+    C: [
+      { min: 11, max: 24, segment: 7 },
+      { min: 8, max: 10, segment: 6 },
+      { min: 7, max: 7, segment: 5 },
+      { min: 5, max: 6, segment: 4 },
+      { min: 4, max: 4, segment: 3 },
+      { min: 3, max: 3, segment: 2 },
+      { min: 0, max: 2, segment: 1 },
+    ]
+  };
+
+  export const LeastRanges = {
+    D: [
+      { min: 0, max: 4, segment: 7 },
+      { min: 5, max: 7, segment: 6 },
+      { min: 8, max: 9, segment: 5 },
+      { min: 10, max: 10, segment: 4 },
+      { min: 11, max: 13, segment: 3 },
+      { min: 14, max: 15, segment: 2 },
+      { min: 16, max: 27, segment: 1 },
+    ],
+    i: [
+      { min: 0, max: 2, segment: 7 },
+      { min: 3, max: 3, segment: 6 },
+      { min: 4, max: 4, segment: 5 },
+      { min: 5, max: 5, segment: 4 },
+      { min: 6, max: 7, segment: 3 },
+      { min: 8, max: 8, segment: 2 },
+      { min: 9, max: 26, segment: 1 },
+    ],
+    S: [
+      { min: 0, max: 1, segment: 7 },
+      { min: 2, max: 2, segment: 6 },
+      { min: 3, max: 3, segment: 5 },
+      { min: 4, max: 4, segment: 4 },
+      { min: 5, max: 6, segment: 3 },
+      { min: 7, max: 8, segment: 2 },
+      { min: 9, max: 27, segment: 1 },
+    ],
+    C: [
+      { min: 0, max: 3, segment: 7 },
+      { min: 4, max: 5, segment: 6 },
+      { min: 6, max: 6, segment: 5 },
+      { min:7, max: 8, segment: 4 },
+      { min: 9, max: 9, segment: 3 },
+      { min: 10, max: 11, segment: 2 },
+      { min: 12, max: 26, segment: 1 },
+    ]
+  };
+
   export function getSegment(letter, value) {
     const ranges = discRanges[letter];
     if (!ranges) return null;
