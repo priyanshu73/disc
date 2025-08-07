@@ -27,7 +27,7 @@ import './Graph.css';
  * @param {string|number} segno - A string of segment numbers, e.g., "3635".
  * =============================================================================
  */
-const Graph = ({ chartData, chartType, segno }) => {
+const Graph = ({ chartData, chartType, segno, profileName }) => {
   // =============================================================================
   // STATE AND REFS
   // =============================================================================
@@ -317,7 +317,7 @@ const Graph = ({ chartData, chartType, segno }) => {
         </div>
 
         <div className="chart-footer">
-          <div className="footer-left">Appraiser</div>
+          <div className="footer-left">{profileName || 'Appraiser'}</div>
           <div className="footer-right"><div className="footer-label-text">Classical<br />Pattern</div></div>
         </div>
       </div>

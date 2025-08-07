@@ -186,7 +186,7 @@ const ResultsPage = () => {
        )}
        
        <div className="main-content">
-         <DiSCChart chartData={chartData} segno={result.segno} />
+         <DiSCChart chartData={chartData} segno={result.segno} profileName={result.pname} />
 
         <div className="profile-card">
           <div className="profile-header">

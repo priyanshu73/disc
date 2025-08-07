@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Graph from './Graph/Graph';
 import './ResultsPage/ResultsPage.css';
 
-const DiSCChart = ({ chartData, segno }) => {
+const DiSCChart = ({ chartData, segno, profileName }) => {
   const [activeGraph, setActiveGraph] = useState('III'); // Default to Graph III
 
   const handleGraphToggle = (graphType) => {
@@ -18,7 +18,8 @@ const DiSCChart = ({ chartData, segno }) => {
       <Graph 
         chartData={chartData} 
         chartType={activeGraph} 
-        segno={segno} 
+        segno={segno}
+        profileName={profileName}
       />
     </div>
   );

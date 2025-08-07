@@ -64,6 +64,7 @@
   padding: 5rem;
   margin-top: 160px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%
 }
 .profile-header {
   border-bottom: 1px solid #eef2f7;
@@ -425,7 +426,7 @@
 .skeleton-container .profile-card {
   padding: 5rem;
   margin-top: 160px;
-  width: 50%;
+  width: 100%;
   margin-left: 4rem;
   min-height: 400px;
 }
