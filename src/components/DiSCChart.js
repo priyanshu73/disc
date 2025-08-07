@@ -3,10 +3,10 @@ import Graph from './Graph/Graph';
 import './ResultsPage/ResultsPage.css';
 
 const DiSCChart = ({ chartData, segno }) => {
-  const [activeGraph, setActiveGraph] = useState(3); // Default to Graph III
+  const [activeGraph, setActiveGraph] = useState('III'); // Default to Graph III
 
-  const handleGraphToggle = (graphNumber) => {
-    setActiveGraph(graphNumber);
+  const handleGraphToggle = (graphType) => {
+    setActiveGraph(graphType);
   };
 
   return (

@@ -66,39 +66,24 @@ const ResultsPage = () => {
      const ResultSkeleton = () => (
      <div className="results-page-container skeleton-container">
        <div className="main-content">
-         {/* Chart card skeleton - simplified to match current structure */}
+         {/* Chart card skeleton - matches actual layout */}
          <div className="chart-card">
            <div className="skeleton-shimmer chart-title-skeleton"></div>
-           <div className="chart-container">
-             <div className="chart-scale">
-               {[1, 2, 3, 4, 5].map((_, idx) => (
-                 <div key={idx} className="skeleton-shimmer scale-label-skeleton"></div>
-               ))}
-             </div>
-                           <div className="chart-area">
-                {[1, 2, 3, 4].map((_, idx) => (
-                 <div key={idx} className="chart-item">
-                   <div className="chart-bar-container">
-                     <div className="skeleton-shimmer chart-bar-skeleton"></div>
-                   </div>
-                   <div className="skeleton-shimmer chart-label-skeleton"></div>
-                 </div>
-               ))}
-             </div>
+           <div className="chart-skeleton">
+             <div className="chart-header-skeleton"></div>
+             <div className="chart-grid-skeleton"></div>
+             <div className="chart-bottom-skeleton"></div>
            </div>
          </div>
 
-         {/* Profile card skeleton */}
+         {/* Profile card skeleton - matches actual layout */}
          <div className="profile-card">
-           <div className="profile-header">
-             <div className="skeleton-shimmer title-skeleton"></div>
-             <div className="skeleton-shimmer date-skeleton"></div>
-           </div>
+           <div className="skeleton-shimmer title-skeleton"></div>
            <div className="skeleton-shimmer description-skeleton"></div>
          </div>
        </div>
 
-       {/* Details grid skeleton */}
+       {/* Details grid skeleton - matches actual layout */}
        <div className="details-grid">
          {[1, 2, 3, 4, 5, 6, 7, 8].map((_, idx) => (
            <div key={idx} className="detail-panel-skeleton">
