@@ -44,7 +44,7 @@ const LoginPage = () => {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
-            <img src="/faviconn.png" alt="GBURG CS Logo" className="logo-icon" />
+            <img src="/disc/faviconn.png" alt="GBURG CS Logo" className="logo-icon" />
             <span className="logo-text1">GBURG CS</span>
           </div>
           <h1 className="login-title">DiSC Assessment</h1>
