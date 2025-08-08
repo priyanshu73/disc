@@ -39,7 +39,7 @@ function App() {
 }
 
 const AppWithRouter = () => (
-  <Router>
+  <Router basename='/disc'>
     <AuthProvider>
       <App />
     </AuthProvider>

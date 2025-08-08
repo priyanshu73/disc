@@ -1,5 +1,5 @@
 // API Configuration
-export const API_BASE_URL = 'http://localhost:4000/api';
+export const API_BASE_URL = '/disc/api';
 
 // API utility functions
 export const apiCall = async (endpoint, options = {}) => {
