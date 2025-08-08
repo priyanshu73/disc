@@ -2,7 +2,8 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-
+import path from 'path'
+import { fileURLToPath } from 'url';
 import apiRouter from './routes/api.js';
 
 const app = express();
@@ -10,22 +11,32 @@ const app = express();
 // Middleware
 app.use(morgan('dev'));
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://acm.gettysburg.edu',
   credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/api', apiRouter);
+app.use('/disc/api', apiRouter);
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Hello from the controller!' })
-});
+// app.get('/', (req, res) => {
+//     res.json({ message: 'Hello from the controller!' })
+// });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const buildDir = path.join(__dirname, 'build')
+app.use('/disc', express.static(buildDir));
+
+app.get('/disc/*', (req,res) => {
+  res.sendFile(path.join(buildDir,'index.html'));
+})
 // 404 handler
 app.use((req, res, next) => {
   res.status(404).json({ error: 'Not found' });
 });
+
 
 // Error handler
 app.use((err, req, res, next) => {
