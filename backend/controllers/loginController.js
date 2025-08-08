@@ -37,7 +37,7 @@ export async function login(req, res) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',  // Change from 'strict' to 'lax'
-      domain: 'http://acm.gettysburg.edu',
+      domain: 'localhost',
       path: '/',  // Add this - crucial!
       maxAge: 2 * 60 * 60 * 1000 // 2 hours
     });
