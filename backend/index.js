@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(morgan('dev'));
 app.use(cors({
-  origin: 'http://localhost:4000/disc',
+  origin: ['http://localhost:4000/disc', 'http://localhost:4000/','138.234.44.121:4000/disc','138.234.44.121:4000'],
   credentials: true
 }));
 app.use(express.json());

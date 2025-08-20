@@ -33,14 +33,16 @@ export async function login(req, res) {
       JWT_SECRET,
       { expiresIn: JWT_EXPIRES_IN }
     );
+    console.log(token)
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: 'true', 
       sameSite: 'lax',  // Change from 'strict' to 'lax'
-      domain: 'localhost',
+      // domain: 'localhost',
       path: '/',  // Add this - crucial!
       maxAge: 2 * 60 * 60 * 1000 // 2 hours
     });
+
     res.json({ message: 'Login successful', user: { username: user.username, user_id: user.user_id } });
   } catch (err) {
     console.error('Login error:', err.message);
