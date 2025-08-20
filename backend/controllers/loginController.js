@@ -36,7 +36,7 @@ export async function login(req, res) {
     console.log(token)
     res.cookie('token', token, {
       httpOnly: true,
-      secure: 'true', 
+      secure: process.env.NODE_ENV === 'production', // Use secure in production only
       sameSite: 'lax',  // Change from 'strict' to 'lax'
       // domain: 'localhost',
       path: '/',  // Add this - crucial!
