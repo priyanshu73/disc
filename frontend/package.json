@@ -2,7 +2,7 @@
   "name": "disc-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/disc",
+  "homepage": "/disc/",
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -18,8 +18,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf ../backend/build && mv build ../backend/",
+    "build": "react-scripts build",
     "test": "react-scripts test",
+    "build:backend": "react-scripts build && rm -rf ../backend/build && cp -r build ../backend/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

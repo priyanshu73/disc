@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className="navbar-logo">
         <Link to="/" className="logo-link">
           <div className="logo-container">
-            <img src="/faviconn.png" alt="GBURG CS DiSC Logo" className="logo-icon" />
+            <img src="/disc/faviconn.png" alt="GBURG CS DiSC Logo" className="logo-icon" />
             <span className="logo-text">GBURG CS DiSC</span>
           </div>
         </Link>
